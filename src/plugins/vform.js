@@ -1,11 +1,20 @@
 import Vue from "vue";
 import {Form} from 'vform'
-export default ({ app }, inject) => {
+import {AlertError, AlertErrors, AlertSuccess, Button, HasError} from 'vform/src/components/bootstrap4'
+// 'vform/src/components/bootstrap4'
+// 'vform/src/components/tailwind'
+
+Vue.component(Button.name, Button)
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+Vue.component(AlertErrors.name, AlertErrors)
+Vue.component(AlertSuccess.name, AlertSuccess)
+export default ({app}, inject) => {
   Form.prototype.submit = function submit(method, url, config = {}) {
     this.startProcessing();
 
     const data = method === 'get'
-      ? { params: this.data() }
+      ? {params: this.data()}
       : this.data();
 
     return new Promise((resolve, reject) => {

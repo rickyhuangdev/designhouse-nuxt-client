@@ -13,18 +13,9 @@ export default {
     ],
     link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}],
     script: [
-      {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js",
-        type: "text/javascript"
-      },
-      {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js",
-        type: "text/javascript"
-      }, {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/js/all.min.js",
-        type: "text/javascript"
-      },
-
+      "~/assets/js/jquery.min.js",
+      "~/assets/js/bootstrap.bundle.min.js",
+      "~/assets/js/font-awesome.js",
     ]
   },
   srcDir: "src/",
@@ -32,7 +23,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/scss/main.scss',
-    '~/assets/css/bootstrap.min.css',
+    "~/assets/css/bootstrap.min.css",
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -45,7 +36,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/composition-api/module',
     '@nuxtjs/router',
   ],
   routerModule: {
@@ -59,7 +49,16 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@nuxtjs/proxy',
   ],
+  proxy: {
+    '/api': {
+      target: process.env.API_BASE,
+      pathRewrite: {
+        '^/api': '/',
+      }
+    }
+  },
   auth: {
     strategies: {
       local: {
@@ -90,10 +89,17 @@ export default {
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: process.env.API_BASE,
+    headers: {
+      common: {
+        Accept: 'application/json'
+      }
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    transpile: ['vform'],
+  },
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   }
