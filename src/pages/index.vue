@@ -1,6 +1,8 @@
 <template>
   <div>
-    hello
+   <div class="container">
+     <h2>{{$auth.loggedIn}}</h2>
+   </div>
   </div>
 </template>
 

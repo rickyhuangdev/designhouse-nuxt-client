@@ -54,7 +54,7 @@
       </div>
 
       <!-- Before Login -->
-      <ul class="before-login font-14 fw-300 text-uppercase">
+      <ul class="before-login font-14 fw-300 text-uppercase" v-if="!$auth.loggedIn">
         <li>
           <nuxt-link :to="{name:'register'}">Sign up</nuxt-link>
         </li>
@@ -65,7 +65,7 @@
       <!-- End Before Login -->
 
       <!-- After Login -->
-      <ul class="author-page white-path">
+      <ul class="author-page white-path" v-else>
         <!-- Profile Dropdown -->
         <li class="dropdown">
           <a
