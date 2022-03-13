@@ -54,7 +54,7 @@
       </div>
 
       <!-- Before Login -->
-      <ul class="before-login font-14 fw-300 text-uppercase" v-if="!$auth.loggedIn">
+      <ul class="before-login font-14 fw-300 text-uppercase d-flex align-items-center mb-0" v-if="!$auth.loggedIn">
         <li>
           <nuxt-link :to="{name:'register'}">Sign up</nuxt-link>
         </li>
