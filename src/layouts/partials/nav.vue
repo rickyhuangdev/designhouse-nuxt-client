@@ -1,11 +1,10 @@
 <template>
   <header class="fixed-topx">
     <nav class="navbar navbar-expand-lg navbar-dark align-items-center">
-      <a
+      <nuxt-link to="/"
         class="navbar-brand text-uppercase fw-500"
-        href="#"
-        title="Project Name"
-      >DesignHouse</a
+        title="Design House"
+      >DesignHouse</nuxt-link
       >
       <button
         class="navbar-toggler mr-auto"
@@ -55,12 +54,12 @@
       </div>
 
       <!-- Before Login -->
-      <ul class="before-login font-14 fw-300 text-uppercase d-none">
+      <ul class="before-login font-14 fw-300 text-uppercase">
         <li>
-          <a href="#">Sign up</a>
+          <nuxt-link :to="{name:'register'}">Sign up</nuxt-link>
         </li>
         <li>
-          <a href="#">Sign in</a>
+          <nuxt-link :to="{name:'login'}">Sign in</nuxt-link>
         </li>
       </ul>
       <!-- End Before Login -->
@@ -132,7 +131,7 @@
 
 <script>
 export default {
-  name: "nav"
+  name: "app-nav"
 }
 </script>
 

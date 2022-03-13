@@ -1,23 +1,23 @@
 <template>
   <div>
-    <Nav/>
+    <APP_Nav/>
     <div class="wrapper">
       <Nuxt/>
     </div>
-    <Footer/>
+    <APP_Footer/>
   </div>
 
 </template>
 
 <script>
-import Nav from "~/layouts/partials/nav";
-import Footer from "~/layouts/partials/footer";
+import APP_Nav from "./partials/nav";
+import APP_Footer from "./partials/footer";
 
 export default {
   name: "default",
   components: {
-    Nav,
-    Footer,
+    APP_Nav,
+    APP_Footer,
   }
 }
 </script>

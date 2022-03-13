@@ -20,13 +20,14 @@ export default {
       {
         src: "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js",
         type: "text/javascript"
-      },{
+      }, {
         src: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/js/all.min.js",
         type: "text/javascript"
       },
 
     ]
   },
+  srcDir: "src/",
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -41,8 +42,12 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/composition-api/module'
+    '@nuxtjs/composition-api/module',
+    '@nuxtjs/router',
   ],
+  routerModule: {
+    /* module options */
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
