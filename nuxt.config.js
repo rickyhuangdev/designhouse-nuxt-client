@@ -13,13 +13,25 @@ export default {
     ],
     link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}],
     script: [
-      '~/assets/js/jquery.min',
-      '~/assets/js/bootstrap.bundle.min',
+      {
+        src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js",
+        type: "text/javascript"
+      },
+      {
+        src: "https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js",
+        type: "text/javascript"
+      },{
+        src: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/js/all.min.js",
+        type: "text/javascript"
+      },
+
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    '~/assets/scss/main.scss'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
