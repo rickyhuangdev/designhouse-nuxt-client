@@ -5,6 +5,7 @@
         Register
       </h1>
       <form class="auth-form" @submit.prevent="submit">
+        <alert-success :form="form">We have sent you an email to activate your account</alert-success>
         <div class="form-group">
           <input
             type="text"
@@ -69,6 +70,9 @@
         <div class="text-right">
           <button type="submit" class="btn btn-info font-16 fw-500 text-uppercase shadow" :disabled="form.busy">
             Register
+            <span v-if="form.busy">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+            </span>
           </button>
         </div>
         <div class="font-14 fw-400 text-center mt-4 text-dark d-flex align-items-center justify-content-between">
@@ -104,7 +108,7 @@ export default {
     submit() {
       console.log(this.form.busy)
       this.form.post('/register').then(res => {
-        console.log(res)
+        this.form.reset()
       }).catch(err => {
         console.log(err)
       })

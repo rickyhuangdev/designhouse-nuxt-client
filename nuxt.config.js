@@ -16,6 +16,7 @@ export default {
       "~/assets/js/jquery.min.js",
       "~/assets/js/bootstrap.bundle.min.js",
       "~/assets/js/font-awesome.js",
+      {src:"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"},
     ]
   },
   srcDir: "src/",
@@ -23,7 +24,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/scss/main.scss',
-    "~/assets/css/bootstrap.min.css",
+
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -51,14 +52,6 @@ export default {
     '@nuxtjs/auth-next',
     '@nuxtjs/proxy',
   ],
-  proxy: {
-    '/api': {
-      target: process.env.API_BASE,
-      pathRewrite: {
-        '^/api': '/',
-      }
-    }
-  },
   auth: {
     strategies: {
       local: {
@@ -101,7 +94,8 @@ export default {
     transpile: ['vform'],
   },
   env: {
-    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
-  }
+    baseUrl: process.env.BASE_URL || 'http://designhouse.test:3000'
+  },
+
 
 }
