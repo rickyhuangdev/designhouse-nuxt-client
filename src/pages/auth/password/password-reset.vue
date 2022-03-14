@@ -22,11 +22,8 @@
                          aria-describedby="email">
                   <HasError :form="form" field="email"/>
                 </div>
-                <button type="submit" class="btn btn-primary float-right" :disabled="form.busy">Submit
-                  <span v-if="form.busy">
-                <i class="fa-solid fa-spinner fa-spin"></i>
-            </span>
-                </button>
+                <base-button :loading="form.busy" position="true">Submit</base-button>
+
               </form>
             </div>
           </div>

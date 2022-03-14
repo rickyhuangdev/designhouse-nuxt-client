@@ -42,12 +42,8 @@
                          v-model.trim="form.password_confirmation"
                          aria-describedby="password_confirmation">
                 </div>
-                <button type="submit" class="btn btn-primary float-right" :disabled="form.busy">Reset Password
-                  <span v-if="form.busy">
-                <i class="fa-solid fa-spinner fa-spin"></i>
-            </span>
-                </button>
-                <base-button>summit</base-button>
+                <base-button :loading="form.busy">Reset Password</base-button>
+
               </form>
             </div>
           </div>

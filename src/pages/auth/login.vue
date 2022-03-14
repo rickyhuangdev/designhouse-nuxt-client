@@ -39,9 +39,7 @@
           <nuxt-link to="/password/email" class="forgot-pass color-blue font-14 fw-400" href="#"> Forgot password ? </nuxt-link>
         </div>
         <div class="text-right">
-          <button type="submit" class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase shadow">
-            Login
-          </button>
+          <base-button :loading="form.busy">Login</base-button>
         </div>
         <p class="font-14 fw-400 text-center mt-4">
           Don't have an account yet?
