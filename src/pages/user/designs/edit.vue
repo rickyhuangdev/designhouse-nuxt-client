@@ -30,10 +30,8 @@
             </label>
             <select id="team"
                     class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
+              <option :value="null">Select a team</option>
+              <option :value="team.id" v-for="team in teams" :key="team.id">{{team.name}}</option>
             </select>
           </div>
           <div class="mb-4">
@@ -89,24 +87,27 @@ export default {
   },
   async asyncData({$axios, params, error, redirect}) {
     try {
-      const design = await $axios.get(`/designs/${params.id}`)
-      return {design: design.data}
+      const {data:{data:design}} = await $axios.get(`/designs/${params.id}`)
+      const {data:{data:teams}} = await $axios.get(`/users/teams`)
+      console.log(design)
+      return {design, teams}
     } catch (e) {
-      if (e.response.status === 404) {
-        error({statusCode: 404, message: 'Design not found'})
-      } else {
-        error({statusCode: 500, message: 'Internal Server Error'})
-      }
+      console.log(e.response.data)
+      // if (e.response.status === 404) {
+      //   error({statusCode: 404, message: 'Design not found'})
+      // } else {
+      //   error({statusCode: 500, message: 'Internal Server Error'})
+      // }
     }
   },
   mounted() {
     if (this.design) {
       Object.keys(this.form).forEach(key => {
-        if (this.design.hasOwnProperty($key)) {
+        if (this.design.hasOwnProperty(key)) {
           this.form[key] = this.design[key]
         }
       });
-      this.form.tags = this.design.tag_list.tags || []
+       this.form.tags = this.design.tag_list.tags || []
       if (this.design.team) {
         this.form.team = this.design.team.id
         this.form.assign_to_team = true
