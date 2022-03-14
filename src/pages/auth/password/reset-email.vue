@@ -47,6 +47,7 @@
                 <i class="fa-solid fa-spinner fa-spin"></i>
             </span>
                 </button>
+                <base-button>summit</base-button>
               </form>
             </div>
           </div>
@@ -85,7 +86,6 @@ export default {
   created() {
     this.form.email = this.$route.query.email
     this.form.token = this.$route.params.token
-    console.log( this.form.token )
   }
 }
 </script>
