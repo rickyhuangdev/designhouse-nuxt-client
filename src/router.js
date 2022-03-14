@@ -39,6 +39,11 @@ const routes = [
     name:'password.reset',
     component:page('auth/password/reset-email.vue')
   },
+  {
+    path:'/user/dashboard',
+    name:'dashboard',
+    component:page('user/dashboard.vue')
+  },
 ];
 export const createRouter = () => {
   return new Router({

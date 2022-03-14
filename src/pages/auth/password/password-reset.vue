@@ -32,6 +32,7 @@
 <script>
 export default {
   name: "reset-password",
+  middleware:['guest'],
   data() {
     return {
       status: '',

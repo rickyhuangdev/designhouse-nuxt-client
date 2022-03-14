@@ -35,6 +35,7 @@
 <script>
 export default {
   name: "login",
+  middleware:['guest'],
   data() {
     return {
       form: this.$vform({
