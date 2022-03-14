@@ -23,7 +23,7 @@
                   <p>{{error}}</p>
                 </div>
                 <slim-copper :options="slimOptions">
-                  <input type="file" name="image">
+                  <input type="file" name="image" accept="image/*">
                 </slim-copper>
                 <div class="text-success caption-sm mt-2" v-if="uploading">
                   <i class="fas fa-spinner fa-spin"></i>
@@ -55,9 +55,33 @@ export default {
   },
   data() {
     return {
-      slimOptions: {},
+      slimOptions: {
+        service: this.slimService,
+        post: 'output',
+        defaultInputName: "image",
+        minSize: '800,600',
+        maxFileSize: 2,
+
+      },
       uploading: false,
       error: ''
+    }
+  },
+  methods: {
+    slimService(formData, progress, success, failure, slim) {
+      this.uploading = true
+      this.$axios.post('/designs', formData).then(res => {
+        this.$router.push({
+          name: 'designs.edit',
+          params: {id: res.data.id}
+        })
+      }).catch(err => {
+        const message = err.response.data.errors
+        this.error = message[Object.keys(message)[0]][0]
+        failure(500)
+      }).finally(() => {
+        this.uploading = false
+      })
     }
   }
 }
