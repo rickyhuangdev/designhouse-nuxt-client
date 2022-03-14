@@ -35,7 +35,7 @@ const routes = [
     component:page('auth/password/password-reset.vue')
   },
   {
-    path:'/password/reset',
+    path:'/password/reset/:token',
     name:'password.reset',
     component:page('auth/password/reset-email.vue')
   },
