@@ -17,30 +17,16 @@
                   </p>
                 </alert-success>
                 <div class="form-group">
-                  <label for="email" class="mb-2 font-10">Email address</label>
-                  <input type="email" class="form-control" id="email"
-                         autocomplete="off"
-                         v-model.trim="form.email"
-                         readonly
-                         :class="{'is-invalid':form.errors.has('email')}"
-                         aria-describedby="email">
-                  <HasError :form="form" field="email"/>
+                  <label class="mb-2 font-10">Email address</label>
+                  <base-input v-model="form.email" :form="form" field="email"></base-input>
                 </div>
                 <div class="form-group">
-                  <label for="email" class="mb-2 font-10">Password</label>
-                  <input type="password" class="form-control" id="password"
-                         autocomplete="off"
-                         v-model.trim="form.password"
-                         :class="{'is-invalid':form.errors.has('password')}"
-                         aria-describedby="password">
-                  <HasError :form="form" field="password"/>
+                  <label class="mb-2 font-10">Password</label>
+                  <base-input v-model="form.password" :form="form" field="password"></base-input>
                 </div>
                 <div class="form-group">
-                  <label for="password_confirmation" class="mb-2 font-10">Confirm Password</label>
-                  <input type="password" class="form-control" id="password_confirmation"
-                         autocomplete="off"
-                         v-model.trim="form.password_confirmation"
-                         aria-describedby="password_confirmation">
+                  <label class="mb-2 font-10">Confirm Password</label>
+                  <base-input v-model="form.password_confirmation" :form="form" field="password"></base-input>
                 </div>
                 <base-button :loading="form.busy">Reset Password</base-button>
 

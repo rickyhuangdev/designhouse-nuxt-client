@@ -14,15 +14,11 @@
                   {{ status }}
                 </alert-success>
                 <div class="form-group">
-                  <label for="email" class="mb-2 font-10">Email address</label>
-                  <input type="email" class="form-control" id="email"
-                         autocomplete="off"
-                         v-model.trim="form.email"
-                         :class="{'is-invalid':form.errors.has('email')}"
-                         aria-describedby="email">
-                  <HasError :form="form" field="email"/>
+                  <label class="mb-2 font-10">Email address</label>
+                  <base-input v-model="form.email" :form="form" field="email"></base-input>
+
                 </div>
-                <base-button :loading="form.busy" position="true">Submit</base-button>
+                <base-button :loading="form.busy" :position="true">Submit</base-button>
 
               </form>
             </div>

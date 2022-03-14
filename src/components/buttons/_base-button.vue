@@ -25,7 +25,7 @@ export default {
       default: false
     },
     block: {
-      type: String,
+      type: Boolean,
       default: false
     },
     size: {

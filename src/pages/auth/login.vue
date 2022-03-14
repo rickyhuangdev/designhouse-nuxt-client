@@ -12,28 +12,10 @@
           </nuxt-link>
         </alert-error>
         <div class="form-group">
-          <input
-            type="text"
-            name="email"
-            class="form-control form-control font-14 fw-300"
-            placeholder="Email"
-            autocomplete="off"
-            v-model.trim="form.email"
-            :class="{'is-invalid':form.errors.has('email')}"
-          />
-          <HasError :form="form" field="email"/>
+          <base-input v-model="form.email" :form="form" field="email"></base-input>
         </div>
         <div class="form-group">
-          <input
-            type="password"
-            name="password"
-            class="form-control form-control font-14 fw-300"
-            placeholder="Password"
-            autocomplete="off"
-            v-model.trim="form.password"
-            :class="{'is-invalid':form.errors.has('password')}"
-          />
-          <HasError :form="form" field="password"/>
+          <base-input v-model="form.password" :form="form" field="password" inputType="password"></base-input>
         </div>
         <div class="mt-4 mb-4 clearfix">
           <nuxt-link to="/password/email" class="forgot-pass color-blue font-14 fw-400" href="#"> Forgot password ? </nuxt-link>

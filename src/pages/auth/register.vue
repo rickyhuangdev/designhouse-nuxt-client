@@ -7,64 +7,24 @@
       <form class="auth-form" @submit.prevent="submit">
         <alert-success :form="form">We have sent you an email to activate your account</alert-success>
         <div class="form-group">
-          <input
-            type="text"
-            name="name"
-            v-model.trim="form.name"
-            class="form-control form-control font-14 fw-300"
-            autocomplete="off"
-            placeholder="Full Name"
-            :class="{'is-invalid':form.errors.has('name')}"
-          />
-          <HasError :form="form" field="name" />
+          <label class="mb-2 font-10">Full Name</label>
+          <base-input v-model="form.name" :form="form" field="name"></base-input>
         </div>
         <div class="form-group">
-          <input
-            type="text"
-            name="username"
-            v-model.trim="form.username"
-            class="form-control form-control font-14 fw-300"
-            autocomplete="off"
-            placeholder="Username"
-            :class="{'is-invalid':form.errors.has('username')}"
-          />
-          <HasError :form="form" field="username" />
+          <label class="mb-2 font-10">Username</label>
+          <base-input v-model="form.username" :form="form" field="username"></base-input>
         </div>
         <div class="form-group">
-          <input
-            type="email"
-            name="email"
-            v-model.trim="form.email"
-            class="form-control form-control font-14 fw-300"
-            autocomplete="off"
-            placeholder="Email"
-            :class="{'is-invalid':form.errors.has('email')}"
-          />
-          <HasError :form="form" field="email" />
+          <label class="mb-2 font-10">Email address</label>
+          <base-input v-model="form.email" :form="form" field="email"></base-input>
         </div>
         <div class="form-group">
-          <input
-            type="password"
-            name="password"
-            v-model.trim="form.password"
-            class="form-control form-control font-14 fw-300"
-            autocomplete="off"
-            placeholder="Password"
-            :class="{'is-invalid':form.errors.has('password')}"
-          />
-          <HasError :form="form" field="password" />
+          <label class="mb-2 font-10">Password</label>
+          <base-input v-model="form.password" :form="form" field="password"></base-input>
         </div>
         <div class="form-group">
-          <input
-            type="password"
-            v-model.trim="form.password_confirmation"
-            name="password_confirmation"
-            class="form-control form-control font-14 fw-300"
-            autocomplete="off"
-            placeholder="Confirm Password"
-            :class="{'is-invalid':form.errors.has('password_confirmation')}"
-          />
-          <HasError :form="form" field="password_confirmation" />
+          <label class="mb-2 font-10">Confirm Password</label>
+          <base-input v-model="form.password_confirmation" :form="form" field="password_confirmation"></base-input>
         </div>
 
         <div class="text-right">
