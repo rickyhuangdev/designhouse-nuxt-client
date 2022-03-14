@@ -1,6 +1,6 @@
 <template>
  <div>
-   <input type="text" class="form-control"
+   <input class="form-control"
           @input="handeInput"
           :type="inputType"
           :value="value"

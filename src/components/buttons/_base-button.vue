@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :class="{[`btn-${type}`]:true,['btn-block']:block,[`btn-${size}`]:true,[`float-right`]:position}"
+  <button class="btn" :class="{[`btn ${type}`]:true,['btn-block']:block,[`${size}`]:true,[`float-right`]:position}"
           :type="nativeType"
           :disabled="loading"
   >
@@ -14,7 +14,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'primary'
+      default: 'btn-primary'
     },
     nativeType: {
       type: String,
@@ -30,7 +30,7 @@ export default {
     },
     size: {
       type: String,
-      default: 'md'
+      default: 'px-4 py-2'
     },
     position:{
       type:Boolean,

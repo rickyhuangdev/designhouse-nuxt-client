@@ -1,72 +1,87 @@
 <template>
-  <div class="p-4 container">
-    <div class="grid sm:grid-cols-1 gap-4 md:grid-cols-2">
-      <div class="mb-4">
-        <img
-          class="w-full shadow-xl rounded h-auto"
-          src="https://tailwindcss.com/img/card-top.jpg"
-          alt="Sunset in the mountains"
-        >
+  <section class="container py-5 d-flex justify-content-center align-items-center">
+    <div class="row">
+      <div class="col-md-6" v-if="design.images">
+          <img class="img-fluid rounded shadow"
+            :src="design.images.large"
+            alt="Sunset in the mountains"/>
       </div>
-      <div class="bg-white dark:bg-slate-900 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-md">
-        <form class="px-2">
-          <div class="mb-4">
-            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">
-              Title
-            </label>
-            <input id="title" type="text"
-                   class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <form @submit.prevent="submit">
+              <alert-success :form="form">
+                Design Successfully Updated
+              </alert-success>
+              <div class="form-group">
+                <label class="mb-2 font-10">Title</label>
+                <base-input v-model="form.title" :form="form" field="title"></base-input>
+              </div>
+              <div class="form-group">
+                <label class="mb-2 font-10">Description</label>
+                <textarea v-model="form.description"
+                          class="form-control"
+                          :class="{'is-invalid':form.errors.has('description')}"
+                ></textarea>
+              </div>
+              <div v-if="teams.length">
+                <div class="form-group">
+                  <label class="mb-2 font-10 d-flex align-items-center">
+                    <input v-model="form.assign_to_team" type="checkbox" class="mr-2"/>
+                    Assign to Team
+                  </label>
+                </div>
+                <div class="form-group">
+                  <label class="mb-2 font-10 d-flex align-items-center">
+                    Choose a team
+                  </label>
+                  <select name="team" id="team" class="form-control"
+                          :disabled="!form.assign_to_team"
+                          v-model="form.team"
+                          :class="{'is-invalid':form.errors.has('team')}"
+                  >
+                    <option :value="null">Choose a team</option>
+                    <option :value="team.id" v-for="team in teams" :key="team.id">{{ team.name }}</option>
+                  </select>
+                  <has-error field="team" :form="form"></has-error>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="mb-2 font-10 d-flex align-items-center">
+                  <input v-model="form.is_live" type="checkbox" class="mr-2" value="true" />
+                  Publish
+                </label>
+              </div>
+              <div class="form-group">
+                <label class="mb-2 font-10 d-flex align-items-center">
+                  Publish
+                </label>
+                <client-only>
+                <better-input-tag :on-change="callbackMethod" :tags="form.tags" on-paste-delimiter=","></better-input-tag>
+                </client-only>
+              </div>
+              <div class="text-right">
+                <base-button :loading="form.busy">Update Design</base-button>
+              </div>
+            </form>
           </div>
-          <div class="mb-4">
-            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">
-              Description
-            </label>
-            <textarea id="description" rows="4"
-                      class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-          </div>
-          <div class="mb-4">
-            <label for="team" class="block text-gray-700 text-sm font-bold mb-2">
-              Select a Team
-            </label>
-            <select id="team"
-                    class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline">
-              <option :value="null">Select a team</option>
-              <option :value="team.id" v-for="team in teams" :key="team.id">{{team.name}}</option>
-            </select>
-          </div>
-          <div class="mb-4">
-            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">
-              Tags
-            </label>
-            <textarea id="tag" rows="4"
-                      class="appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-          </div>
-          <div class="md:flex md:items-center mb-4 justify-start">
-            <label class="md:w-2/3 block text-gray-500 font-bold flex items-center">
-              <input class="mr-2 leading-tight" type="checkbox">
-              <span class="text-sm">
-           Assign to team
-           </span>
-            </label>
-          </div>
-          <div class="md:flex md:items-center mb-4 justify-start">
-            <label class="md:w-2/3 block text-gray-500 font-bold flex items-center">
-              <input class="mr-2 leading-tight" type="checkbox">
-              <span class="text-sm">
-           Publish this design
-           </span>
-            </label>
-          </div>
-        </form>
+        </div>
       </div>
+
+
     </div>
 
-  </div>
+  </section>
 </template>
 
 <script>
+import BetterInputTag from 'better-vue-input-tag'
 export default {
-  name: "edit",
+  name: "editDesign",
+  middleware:['auth'],
+  components:{
+    BetterInputTag
+  },
   data() {
     return {
       form: this.$vform({
@@ -82,6 +97,9 @@ export default {
   },
   methods: {
     submit() {
+
+    },
+    callbackMethod(){
 
     }
   },

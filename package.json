@@ -18,6 +18,7 @@
     "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/router": "^1.7.0",
     "axios": "^0.26.1",
+    "better-vue-input-tag": "^1.1.0",
     "bootstrap": "^4.6.1",
     "bootstrap-icons": "^1.8.1",
     "bootstrap-vue": "^2.21.2",
