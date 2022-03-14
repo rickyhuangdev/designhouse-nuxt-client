@@ -79,13 +79,13 @@
           >
             <img
               class="user-thumb"
-              src="~assets/images/profile.png"
+              :src="$auth.user.photo_url"
               alt="Neba Funwi-Gabga"
             />
             <div class="usr-info">
-                                <span class="user-name font-14 fw-500"
-                                >John Doe</span
-                                >
+                                <span class="user-name font-14 fw-500">
+                                  {{ $auth.user.username }}
+                                </span>
               <span class="user-deg font-10 fw-300"
               >Sr. UI Designer</span
               >
@@ -116,10 +116,10 @@
               Setting
             </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" title="Sign Out">
+            <button class="dropdown-item" title="Sign Out" @click="logout">
               <i class="fa fa-lock"></i>
               Sign Out
-            </a>
+            </button>
           </div>
         </li>
         <!-- End Profile Dropdown -->
@@ -131,7 +131,12 @@
 
 <script>
 export default {
-  name: "app-nav"
+  name: "app-nav",
+  methods:{
+    logout(){
+      this.$auth.logout()
+    }
+  }
 }
 </script>
 
