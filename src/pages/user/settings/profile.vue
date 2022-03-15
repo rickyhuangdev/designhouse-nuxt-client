@@ -25,15 +25,15 @@
           </div>
           <div class="form-group">
             <label class="mb-2 font-10">Location</label>
-            <base-gmap></base-gmap>
+            <base-gmap @address-response="handleAddress" :initialValue="form.formatted_address"></base-gmap>
           </div>
           <div class="form-group">
-            <label class="mb-2 font-10">Introduction</label>
+            <label class="mb-2 font-10">About Me</label>
             <textarea v-model="form.about"
                       class="form-control"
                       :class="{'is-invalid':form.errors.has('about')}"
             ></textarea>
-            <HasError :form="form" field="description"/>
+            <HasError :form="form" field="about"/>
           </div>
 
 
@@ -63,7 +63,10 @@ export default {
         email: '',
         about: '',
         formatted_address: '',
-        location: {},
+        location: {
+          aa: '123',
+          bb: '233'
+        },
         available_to_hire: false
       })
 
@@ -71,16 +74,21 @@ export default {
   },
   methods: {
     submit() {
-      this.form.put(`/designs/${this.$route.params.id}`).then(re => {
-        setTimeout(() => {
-          this.$router.push({name: 'settings.designs'})
-        }, 1000)
+      this.form.put(`/settings/profile`).then(re => {
+        // setTimeout(() => {
+        //   this.$router.push({name: 'settings.designs'})
+        // }, 1000)
       }).catch(err => {
         console.log(err)
       })
     },
     callbackMethod() {
 
+    },
+    handleAddress(data) {
+      this.form.formatted_address = data.formatted_address
+      this.form.location.longitude = data.longitude
+      this.form.location.latitude = data.latitude
     }
   },
   mounted() {
@@ -94,6 +102,8 @@ export default {
         longitude: this.$auth.user.location.coordinates[0],
         latitude: this.$auth.user.location.coordinates[1]
       }
+    } else {
+      this.form.location = {}
     }
 
   }
