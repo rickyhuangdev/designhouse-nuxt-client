@@ -1,5 +1,5 @@
 <template>
- <div class="dashboard_page">
+ <div class="dashboard_page pb-5">
    <div class="user-account-setting">
      <div class="container">
        <div class="row">

@@ -1,9 +1,7 @@
 <template>
   <div>
     <APP_Nav/>
-    <div class="h-100">
       <Nuxt/>
-    </div>
     <APP_Footer/>
   </div>
 

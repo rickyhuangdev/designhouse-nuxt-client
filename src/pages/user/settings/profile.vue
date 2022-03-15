@@ -24,6 +24,10 @@
             <base-input v-model="form.address" :form="form" field="address"></base-input>
           </div>
           <div class="form-group">
+            <label class="mb-2 font-10">Location</label>
+            <base-gmap></base-gmap>
+          </div>
+          <div class="form-group">
             <label class="mb-2 font-10">Introduction</label>
             <textarea v-model="form.about"
                       class="form-control"
@@ -32,13 +36,13 @@
             <HasError :form="form" field="description"/>
           </div>
 
+
           <div class="form-group">
             <label class="mb-2 font-10 d-flex align-items-center">
               <input v-model="form.available_to_hire" type="checkbox" class="mr-2" value="true"/>
               Available to hire
             </label>
           </div>
-
           <div class="w-100">
             <base-button :loading="form.busy" :position="true">Save Changes</base-button>
           </div>
