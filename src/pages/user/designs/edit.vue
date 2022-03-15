@@ -110,16 +110,15 @@ export default {
   },
   async asyncData({$axios, params, error, redirect}) {
     try {
-      const {data:{data:design}} = await $axios.get(`/designs/${params.id}`)
+      const {data:{data:design}} = await $axios.get(`/designs/${params.id}/byUser`)
       const {data:{data:teams}} = await $axios.get(`/users/teams`)
       return {design, teams}
     } catch (e) {
-      console.log(e.response.data)
-      // if (e.response.status === 404) {
-      //   error({statusCode: 404, message: 'Design not found'})
-      // } else {
-      //   error({statusCode: 500, message: 'Internal Server Error'})
-      // }
+      if (e.response.status === 404) {
+        error({statusCode: 404, message: 'Design not found'})
+      } else {
+        error({statusCode: 500, message: 'Internal Server Error'})
+      }
     }
   },
   mounted() {
