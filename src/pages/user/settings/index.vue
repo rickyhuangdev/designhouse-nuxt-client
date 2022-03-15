@@ -37,7 +37,7 @@ export default {
           route: 'settings.dashboard'
         },
         {
-          title: 'Upload Profile',
+          title: 'Profile',
           route: 'settings.profile'
         },
         {
