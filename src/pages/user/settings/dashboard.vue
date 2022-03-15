@@ -1,6 +1,10 @@
 <template>
-<div class="dashboard">
-  usergdf
+<div>
+  <div class="row">
+    <div class="col">
+      <h1>wesdfdsfrwer</h1>
+    </div>
+  </div>
 </div>
 </template>
 
