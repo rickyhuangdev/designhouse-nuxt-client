@@ -6,9 +6,9 @@
             :src="design.images.large"
             alt="Sunset in the mountains"/>
       </div>
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-body">
+      <div class="col-md-6 mt-4 mt-sm-0">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
             <form @submit.prevent="submit">
               <alert-success :form="form">
                 Design Successfully Updated
@@ -23,6 +23,7 @@
                           class="form-control"
                           :class="{'is-invalid':form.errors.has('description')}"
                 ></textarea>
+                <HasError :form="form" field="description"/>
               </div>
               <div v-if="teams.length">
                 <div class="form-group">
@@ -54,7 +55,7 @@
               </div>
               <div class="form-group">
                 <label class="mb-2 font-10 d-flex align-items-center">
-                  Publish
+                  Tags
                 </label>
                 <client-only>
                 <better-input-tag :on-change="callbackMethod" :tags="form.tags" on-paste-delimiter=","></better-input-tag>
@@ -97,7 +98,11 @@ export default {
   },
   methods: {
     submit() {
-
+      this.form.put(`/designs/${this.$route.params.id}`).then(re=>{
+        console.log(re)
+      }).catch(err=>{
+        console.log(err)
+      })
     },
     callbackMethod(){
 
@@ -107,7 +112,6 @@ export default {
     try {
       const {data:{data:design}} = await $axios.get(`/designs/${params.id}`)
       const {data:{data:teams}} = await $axios.get(`/users/teams`)
-      console.log(design)
       return {design, teams}
     } catch (e) {
       console.log(e.response.data)
@@ -126,7 +130,7 @@ export default {
         }
       });
        this.form.tags = this.design.tag_list.tags || []
-      if (this.design.team) {
+      if (this.design) {
         this.form.team = this.design.team.id
         this.form.assign_to_team = true
       } else {

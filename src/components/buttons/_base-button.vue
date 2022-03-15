@@ -30,7 +30,7 @@ export default {
     },
     size: {
       type: String,
-      default: 'px-4 py-2'
+      default: 'btn-md shadow-lg rounded'
     },
     position:{
       type:Boolean,
