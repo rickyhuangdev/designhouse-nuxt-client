@@ -7,13 +7,13 @@
     </div>
     <div class="comment-meta">
       <h3 class="font-16 fw-500 mb-2">
-        <a href="#" title="Neba">{{ comment.user.name }}</a>
+        <a href="#" :title="comment.user.name">{{ comment.user.name }}</a>
       </h3>
       <p class="font-14 fw-300 mb-2">
         {{ comment.body }}
       </p>
-      <span class="font-14 fw-300">
-                 <a href="#">{{ comment.created_at_dates.created_at_human }}</a>
+      <span class="font-12 fw-300 d-flex justify-content-between align-items-center">
+                 <span><i class="font-weight-bold">Posted at</i> {{ comment.created_at_dates.created_at_human }}</span>
                  <a href="#" @click.prevent="destroyComment" v-if="$auth.loggedIn && $auth.user.id ===comment.user.id">
                    <i class="fa fa-trash-alt"></i></a>
       </span>

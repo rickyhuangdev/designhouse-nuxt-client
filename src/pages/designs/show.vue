@@ -1,5 +1,5 @@
 <template>
-  <section class="post-details mt-4 pb-5">
+  <section class="post-details mt-5 pb-5">
     <div class="container">
       <div class="row">
         <div class="col-md-8">
@@ -31,10 +31,26 @@
               <base-comment v-for="comment in comments" :key="comment.id" :comment="comment" @deleted="handleDelete"/>
             </ul>
           </div>
+          <template v-if="$auth.loggedIn">
+            <form @submit="saveComment" class="mt-5">
+              <div class="form-group">
+                <label class="mb-2 font-13">Add a Comment</label>
+                <textarea v-model="form.body"
+                          class="form-control"
+                          placeholder="Enter a comment"
+                          :class="{'is-invalid':form.errors.has('body')}"
+                ></textarea>
+                <HasError :form="form" field="body"/>
+              </div>
+              <div class="w-100">
+                <base-button :loading="form.busy" :position="true">Post a Comment</base-button>
+              </div>
+            </form>
+          </template>
 
           <!--/ END COMMENTS-->
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mt-3 mt-sm-0">
           <div class="post-detail-sidebar">
             <!-- Designer info -->
             <div
@@ -80,7 +96,7 @@
                   </a>
                 </div>
                 <div class="stats-num d-table-cell w-50 text-right">
-                  <a href="#">100 Likes</a>
+                  <a href="#">{{design.likes_count}} Likes</a>
                 </div>
               </li>
 
@@ -89,7 +105,7 @@
                   class="stats-txt d-table-cell w-100"
                 >
                   <a href="#">
-                    More from John Doe
+                    More from {{design.user.name}}
                   </a>
                 </div>
               </li>
@@ -146,31 +162,8 @@
               <div
                 class="designs-tag font-14 fw-300"
               >
-                <a href="#" title="3D">3D</a>
-                <a href="#" title="among trees"
-                >among trees</a
-                >
-                <a href="#" title="birds"
-                >birds</a
-                >
-                <a href="#" title="environment"
-                >environment</a
-                >
-                <a href="#" title="forest"
-                >forest</a
-                >
-                <a href="#" title="night"
-                >night</a
-                >
-                <a href="#" title="stylized"
-                >stylized</a
-                >
-                <a href="#" title="sunset"
-                >sunset</a
-                >
-                <a href="#" title="survival"
-                >survival</a
-                >
+                <b-badge variant="info" v-for="(tag,index) in design.tag_list.tags" :key="index">{{tag}}</b-badge>
+<!--                <a href="#" title="3D" v-for="(tag,index) in design.tag_list.tags" :key="index">{{tag}}</a>-->
               </div>
             </div>
             <!-- End Designs Tags -->
@@ -186,7 +179,11 @@
 export default {
   name: "show",
   data() {
-    return {}
+    return {
+      form: this.$vform({
+        body: ''
+      })
+    }
   },
   async asyncData({$axios, params, error}) {
     try {
@@ -203,6 +200,16 @@ export default {
   methods: {
     handleDelete(id) {
       this.comments = this.comments.filter(k => k.id !== id)
+    },
+    saveComment() {
+      this.form.post(`/designs/${this.design.id}/comments`)
+        .then(res => {
+          this.form.reset()
+          this.comments = [...this.comments, res.data.data]
+        }).catch(e => {
+        console.log(e)
+      })
+
     }
   }
 }
