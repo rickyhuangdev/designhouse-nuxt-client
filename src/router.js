@@ -101,6 +101,11 @@ const routes = [
     name: 'designs.search',
     component: page('designs/search.vue')
   },
+  {
+    path: '/design/:slug',
+    name: 'designs.show',
+    component: page('designs/show.vue')
+  },
 ];
 export const createRouter = () => {
   return new Router({

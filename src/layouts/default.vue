@@ -2,7 +2,7 @@
   <div>
     <APP_Nav/>
       <Nuxt/>
-    <APP_Footer/>
+<!--    <APP_Footer/>-->
   </div>
 
 </template>
