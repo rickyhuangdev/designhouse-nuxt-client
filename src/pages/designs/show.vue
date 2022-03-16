@@ -59,7 +59,7 @@
               <a
                 class="float-left"
                 href="#"
-                title="Neba"
+                :title="design.user.name"
               >
                 <img
                   :src="design.user.photo_url"
@@ -88,10 +88,18 @@
 
               <li class="d-table w-100 d-flex align-items-center">
                 <div class="stats-txt d-table-cell w-50">
-                  <a href="#" class="d-flex align-items-center">
-                 <span class="mr-2">
-               <i class="fa fa-heart"></i>
+                  <a href="#" class="d-flex align-items-center" @click.prevent="likeDesign">
+                    <template v-if="current_user_likes">
+                     <span class="mr-2">
+                   <i class="fa fa-heart text-danger"></i>
                </span>
+                      Unlike
+                    </template>
+                    <template v-else>
+                     <span class="mr-2">
+                   <i class="fa fa-heart text-black-50"></i>
+               </span>
+                    </template>
                     Like
                   </a>
                 </div>
@@ -155,7 +163,8 @@ export default {
     return {
       form: this.$vform({
         body: ''
-      })
+      }),
+      current_user_likes: false
     }
   },
   async asyncData({$axios, params, error}) {
@@ -183,7 +192,23 @@ export default {
         console.log(e)
       })
 
+    },
+    checkIfCurrentUserLikes() {
+      this.$axios.get(`/designs/${this.design.id}/liked`)
+        .then(res => {
+          this.current_user_likes = res.data.liked
+        })
+    },
+    likeDesign() {
+      this.$axios.post(`/designs/${this.design.id}/like`)
+        .then(res => {
+          this.current_user_likes = !this.current_user_likes
+          this.design.likes_count = res.data.total_likes
+        })
     }
+  },
+  created() {
+    this.checkIfCurrentUserLikes()
   }
 }
 </script>
