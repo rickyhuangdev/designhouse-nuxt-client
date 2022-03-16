@@ -113,43 +113,16 @@
             </ul>
             <!-- End Designer Design Info -->
             <!-- Designer More Designs -->
-            <div class="more-designs-outer pb-3">
+            <div class="more-designs-outer pb-3" v-if="design.related_designs.length>0">
               <ul class="more-designs row">
-                <li class="col-6">
-                  <a href="#">
+                <li class="col-6" v-for="design in design.related_designs" :key="design.id">
+                  <nuxt-link :to="`/design/${design.slug}`">
                     <img
                       class="w-100"
-                      src="~assets/images/among_trees_night_dribbble.png"
-                      alt="Image"
+                      :src="design.handle_image.thumbnail"
+                      :alt="design.title"
                     />
-                  </a>
-                </li>
-                <li class="col-6">
-                  <a href="#">
-                    <img
-                      class="w-100"
-                      src="~assets/images/among_trees_night_dribbble.png"
-                      alt="Image"
-                    />
-                  </a>
-                </li>
-                <li class="col-6">
-                  <a href="#">
-                    <img
-                      class="w-100"
-                      src="~assets/images/among_trees_night_dribbble.png"
-                      alt="Image"
-                    />
-                  </a>
-                </li>
-                <li class="col-6">
-                  <a href="#">
-                    <img
-                      class="w-100"
-                      src="~assets/images/among_trees_night_dribbble.png"
-                      alt="Image"
-                    />
-                  </a>
+                  </nuxt-link>
                 </li>
               </ul>
             </div>
