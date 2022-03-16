@@ -28,58 +28,7 @@
               <strong class="fw-500">{{ comments.length }} comments</strong>
             </h1>
             <ul class="comment-list">
-              <li class="clearfix" v-for="comment in comments" :key="comment.id">
-                <div class="comment-thumb float-left">
-                  <a href="#">
-                    <img :src="comment.user.photo_url"/>
-                  </a>
-                </div>
-                <div class="comment-meta">
-                  <h3 class="font-16 fw-500 mb-2">
-                    <a href="#" title="Neba">{{ comment.user.name }}</a>
-                  </h3>
-                  <p class="font-14 fw-300 mb-2">
-                    {{ comment.body }}
-                  </p>
-                  <span class="font-14 fw-300">
-                 <a href="#">{{ comment.created_at_dates.created_at_human }}</a>
-                     </span>
-                </div>
-              </li>
-              <li class="clearfix">
-                <div
-                  class="comment-thumb float-left"
-                >
-                  <a href="#">
-                    <img
-                      src="assets/images/profile.png"
-                      class="neba"
-                    />
-                  </a>
-                </div>
-                <div class="comment-meta">
-                  <h3
-                    class="font-16 fw-500 mb-2"
-                  >
-                    <a href="#" title="Neba"
-                    >Neba</a
-                    >
-                  </h3>
-                  <p
-                    class="font-14 fw-300 mb-2"
-                  >
-                    Nice design mate!
-                  </p>
-                  <span
-                    class="font-14 fw-300"
-                  >
-                                                        <a href="#"
-                                                        >2 days ago</a
-                                                        >
-                                                    </span>
-
-                </div>
-              </li>
+              <base-comment v-for="comment in comments" :key="comment.id" :comment="comment" @deleted="handleDelete"/>
             </ul>
           </div>
 
@@ -251,7 +200,11 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    handleDelete(id) {
+      this.comments = this.comments.filter(k => k.id !== id)
+    }
+  }
 }
 </script>
 
