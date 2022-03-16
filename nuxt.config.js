@@ -23,7 +23,8 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/scss/main.scss',
-    // '~/assets/css/bootstrap.min.css',
+    '~/assets/css/bootstrap.min.css',
+    '~/assets/css/menukit.css',
 
   ],
 
@@ -50,7 +51,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
-    'bootstrap-vue/nuxt',
+    // 'bootstrap-vue/nuxt',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',

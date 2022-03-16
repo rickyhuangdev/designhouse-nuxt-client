@@ -1,6 +1,6 @@
 <template>
-  <header class="fixed-topx">
-    <nav class="navbar navbar-expand-lg navbar-dark align-items-center">
+  <header class="border-bottom shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white align-items-center container-fluid">
       <nuxt-link to="/"
         class="navbar-brand text-uppercase fw-500"
         title="Design House"
@@ -28,38 +28,22 @@
             >
           </li>
         </ul>
-        <div class="header-search">
-          <form action="" method="">
-            <div class="form-group">
-              <input
-                type="text"
-                autocomplete="OFF"
-                name="search"
-                class="form-control text-white font-14 fw-300"
-                placeholder="Search and hit enter..."
-              />
-              <div class="search-icon text-white">
-                <i class="fas fa-search"></i>
-              </div>
-            </div>
-          </form>
-        </div>
         <div
-          class="upload-shot white-path font-14 fw-500 text-uppercase mr-auto"
+          class="upload-shot white-path font-14 fw-500 text-uppercase ml-auto"
         >
-          <nuxt-link to="/upload" class="primary-bg-color text-white">
+          <nuxt-link to="/upload" class="btn-info btn rounded shadow-sm text-white">
             <i class="fas fa-cloud-upload-alt"></i> Upload
           </nuxt-link>
         </div>
       </div>
 
       <!-- Before Login -->
-      <ul class="before-login font-14 fw-300 text-uppercase d-flex align-items-center mb-0" v-if="!$auth.loggedIn">
+      <ul class="font-14 fw-300 text-uppercase d-flex align-items-center mb-0" v-if="!$auth.loggedIn">
         <li>
-          <nuxt-link :to="{name:'register'}">Sign up</nuxt-link>
+          <nuxt-link :to="{name:'register'}" class="nav-link text-dark font-14 login-text">Sign up</nuxt-link>
         </li>
         <li>
-          <nuxt-link :to="{name:'login'}">Sign in</nuxt-link>
+          <nuxt-link :to="{name:'login'}" class="nav-link text-dark font-14 login-text">Sign in</nuxt-link>
         </li>
       </ul>
       <!-- End Before Login -->
@@ -82,15 +66,12 @@
               :src="$auth.user.photo_url"
               alt="Neba Funwi-Gabga"
             />
-            <div class="usr-info">
-                                <span class="user-name font-14 fw-500">
+            <div class="usr-info d-flex flex-column">
+              <span class="user-name font-14 fw-500 text-dark">
                                   {{ $auth.user.username }}
-                                </span>
-              <span class="user-deg font-10 fw-300"
-              >{{$auth.user.tagline}}r</span
-              >
-              <span class="down-chevron">
-                                    <i class="fa fa-angle-down"></i>
+              </span>
+              <span class="down-chevron text-dark">
+                <i class="fa fa-angle-down"></i>
                                 </span>
             </div>
           </a>
@@ -147,5 +128,12 @@ export default {
 </script>
 
 <style scoped>
-
+.dropdown-menu{
+  left: -100px!important;
+  margin-top: 15px;
+}
+.login-text{
+  color: #6e6d7a!important;
+  font-weight: 500;
+}
 </style>
