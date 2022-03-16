@@ -23,8 +23,8 @@
             <nuxt-link :to="{name:'designs.search'}" class="nav-link" title="Shots">Designs</nuxt-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" title="Designers"
-            > Designers </a
+            <nuxt-link :to="{name:'designers.list'}" class="nav-link" title="Designers"
+            > Designers </nuxt-link
             >
           </li>
         </ul>

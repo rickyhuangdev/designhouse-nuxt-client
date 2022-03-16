@@ -106,6 +106,16 @@ const routes = [
     name: 'designs.show',
     component: page('designs/show.vue')
   },
+  {
+    path: '/designers',
+    name: 'designers.list',
+    component: page('designers/list.vue')
+  },
+  {
+    path: '/designer/:slug',
+    name: 'designers.show',
+    component: page('designers/show.vue')
+  },
 ];
 export const createRouter = () => {
   return new Router({
