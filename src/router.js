@@ -115,6 +115,11 @@ const routes = [
     name: 'designers.show',
     component: page('designers/show.vue')
   },
+  {
+    path: '/hiring',
+    name: 'designers.hiring',
+    component: page('designers/hiring.vue')
+  },
 ];
 export const createRouter = () => {
   return new Router({

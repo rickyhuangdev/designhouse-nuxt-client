@@ -16,7 +16,7 @@
                 trust DesignHouse when they are looking for top <strong class="font-weight-bold">design talent</strong>.
               </p>
             </div>
-            <a href="#" class="btn btn-info mt-5 rounded-lg shadow btn-lg">Get started today</a>
+            <nuxt-link :to="{name:'designers.hiring'}" class="btn btn-info mt-5 rounded-lg shadow btn-lg">Get started today</nuxt-link>
           </div>
         </div>
         <div class="col-md-7 mt-md-0 mt-5">
@@ -187,7 +187,8 @@ export default {
   }
 }
 .company-logos{
-    gap: 26px 48px;
+  gap: 26px 48px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 </style>

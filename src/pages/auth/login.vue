@@ -1,5 +1,5 @@
 <template>
-  <section class="container py-5 d-flex justify-content-center align-items-center">
+  <section class="container-fluid py-5 d-flex justify-content-center align-items-center">
     <div class="auth-body">
       <h1 class="text-uppercase fw-500 mb-4 text-center font-22">
         Login

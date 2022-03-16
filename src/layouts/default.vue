@@ -1,7 +1,9 @@
 <template>
   <div>
     <APP_Nav/>
-      <Nuxt/>
+     <div class="main">
+       <Nuxt/>
+     </div>
     <APP_Footer/>
   </div>
 
@@ -21,5 +23,7 @@ export default {
 </script>
 
 <style scoped>
-
+.main{
+  min-height: 85vh;
+}
 </style>

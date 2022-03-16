@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="content px-5">
         <div class="row">
-          <div class="col-md-6 text-left d-flex flex-column align-items-center justify-content-center">
+          <div class="col-md-6 text-left d-flex flex-column justify-content-start">
             <h1 class="content-title">
               Discover the world’s top designers & creatives
             </h1>
