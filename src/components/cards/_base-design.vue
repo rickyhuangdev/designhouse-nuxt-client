@@ -1,5 +1,5 @@
 <template>
-  <div class="design-card">
+  <div class="design-card rounded">
     <div class="bg-white rounded-lg overflow-hidden flex-1 flex flex-col">
       <a :href="`/design/${design.slug}`">
         <div class="bg-cover h-48" :style="`background-image: url('${design.images.thumbnail}');`">
@@ -33,7 +33,7 @@
             {{design.created_at_dates.created_at_human}}
           </div>
         </div>
-        <div class="card-datetime fw-300 d-flex justify-content-center">
+        <div class="card-datetime fw-300 d-flex">
           <div class="ml-1 text-right flex-1">
             <ul class="font-12 fw-400 list-inline text-light-gray">
 
@@ -67,6 +67,6 @@ export default {
 
 <style scoped>
 .design-card{
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 </style>

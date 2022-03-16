@@ -1,13 +1,15 @@
 <template>
-  <div class="mt-4">
-    <div class="container">
-      <div class="row justify-content-center mt-5">
-        <div class="col">
-          <h2 class="text-center index-title">You aren’t following anyone yet</h2>
-          <h5 class="text-center mt-4 sub-title">Check out some of today’s popular shots</h5>
-        </div>
-      </div>
-      <div class="section design-list py-5">
+  <div>
+      <base-jumbotron></base-jumbotron>
+     <div class="container">
+       <div class="row">
+         <div class="col">
+           <h2 class="text-center index-title">You aren’t following anyone yet</h2>
+           <h5 class="text-center mt-4 sub-title">Check out some of today’s popular shots</h5>
+         </div>
+       </div>
+     </div>
+      <div class="section design-list py-5 container">
         <base-design v-for="design in designs" :key="design.id" :design="design">
 
         </base-design>
@@ -22,10 +24,8 @@
       <div v-observe-visibility="visibilityChanged" v-if="designs.length">
       </div>
     </div>
-  </div>
 </template>
 <script>
-
 export default {
   name: 'IndexPage',
   data() {
