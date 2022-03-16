@@ -30,6 +30,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/vform.js',
+    '~/plugins/vue-observe-visibility.js',
     '~/components/_globals',
     {src: '~/plugins/gmaps', ssr: false}
   ],

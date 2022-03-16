@@ -55,7 +55,7 @@
 
 <script>
 export default {
-  name: "_base-design",
+  name: "base-design",
   props: {
     design: {
       type: Object,
@@ -67,6 +67,6 @@ export default {
 
 <style scoped>
 .design-card{
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 </style>

@@ -87,7 +87,7 @@
                                   {{ $auth.user.username }}
                                 </span>
               <span class="user-deg font-10 fw-300"
-              >Sr. UI Designer</span
+              >{{$auth.user.tagline}}r</span
               >
               <span class="down-chevron">
                                     <i class="fa fa-angle-down"></i>
