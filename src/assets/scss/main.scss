@@ -9,6 +9,12 @@ body{
   font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   color: #0d0c22!important;
 }
+html,body
+div#__nuxt,
+#__layout,
+#__layout > div{
+  min-height: 100vh;
+}
 .post-overlay {
   background: rgba(255, 255, 255,1);
   width: 100%;

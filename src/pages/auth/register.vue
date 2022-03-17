@@ -1,6 +1,6 @@
 <template>
-  <section class="authentication">
-    <div class="auth-body">
+  <section class="container-fluid p-3 d-flex justify-content-center align-items-center">
+    <div class="auth-body shadow-sm mb-5">
       <h1 class="text-uppercase fw-500 mb-4 text-center font-22 text-dark">
         Register
       </h1>

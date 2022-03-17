@@ -1,12 +1,9 @@
 <template>
-  <div>
-    <APP_Nav/>
-     <div class="main">
-       <Nuxt/>
-     </div>
-    <APP_Footer/>
+  <div id="custom-page">
+    <APP_Nav id="header"/>
+    <Nuxt />
+    <APP_Footer id="footer"/>
   </div>
-
 </template>
 
 <script>
@@ -23,7 +20,13 @@ export default {
 </script>
 
 <style scoped>
-.main{
-  min-height: 85vh;
+/*#footer{*/
+/*  position: absolute;*/
+/*  bottom: 0;*/
+/*  left: 0;*/
+/*  width: 100%;*/
+/*}*/
+#custom-page{
+  height: 100vh;
 }
 </style>

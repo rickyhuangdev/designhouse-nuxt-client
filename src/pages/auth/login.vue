@@ -1,6 +1,6 @@
 <template>
-  <section class="container-fluid py-5 d-flex justify-content-center align-items-center">
-    <div class="auth-body">
+  <section class="container-fluid py-5 d-flex justify-content-center align-items-center min-vh-100">
+    <div class="auth-body shadow-sm ">
       <h1 class="text-uppercase fw-500 mb-4 text-center font-22">
         Login
       </h1>
@@ -11,7 +11,7 @@
             Resend verify email
           </nuxt-link>
         </alert-error>
-        <div class="form-group">
+        <div class="form-group mb-3">
           <base-input v-model="form.email" :form="form" field="email"></base-input>
         </div>
         <div class="form-group">
