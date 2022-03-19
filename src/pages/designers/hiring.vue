@@ -13,510 +13,157 @@
     </div>
     <div class="container-fluid px-4">
       <div class="row">
-        <div class="col-md-4">
-          <form class="">
+        <div class="col-md-3">
+          <form @submit.prevent="fetchDesigners">
             <div class="card mb-4 search-section">
-            <div class="card-body">
-              <div class="form-group mb-3">
-                <label for="exampleInputEmail1">Keyword Search</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-              </div>
-              <div class="form-group mb-3">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </select>
-              </div>
-              <fieldset class="form-group d-flex flex-column">
-                <legend class="col-form-label float-sm-left pt-0">Specialties</legend>
-                <div class="">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                    <label class="form-check-label" for="gridRadios1">
-                      Animation
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">
-                      Brand / Graphic Design
-                    </label>
-                  </div>
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                    <label class="form-check-label" for="gridRadios3">
-                      Illustration
-                    </label>
-                  </div>
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                    <label class="form-check-label" for="gridRadios3">
-                      Leadership
-                    </label>
-                  </div>
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                    <label class="form-check-label" for="gridRadios3">
-                      Mobile Design
-                    </label>
-                  </div>
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                    <label class="form-check-label" for="gridRadios3">
-                      UI / Visual Design
-                    </label>
-                  </div>
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                    <label class="form-check-label" for="gridRadios3">
-                      Product Design
-                    </label>
-                  </div>
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                    <label class="form-check-label" for="gridRadios3">
-                      UX Design / Research
-                    </label>
-                  </div>
-                  <div class="form-check ">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
-                    <label class="form-check-label" for="gridRadios3">
-                      Web Design
-                    </label>
-                  </div>
+              <div class="card-body">
+                <div class="form-group mb-3">
+                  <label for="exampleInputEmail1" class="mb-3">Keyword Search</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" v-model="filters.keywords">
                 </div>
-              </fieldset>
-            </div>
+                <div class="form-group mb-3">
+                  <label for="exampleFormControlSelect1" class="mb-3">Specialties</label>
+                  <select class="form-control" id="exampleFormControlSelect1">
+                    <option>Choose a Specialty</option>
+                    <option>Animation</option>
+                    <option>Brand / Graphic Design</option>
+                    <option>Illustration</option>
+                    <option>Leadership</option>
+                    <option>Mobile Design</option>
+                    <option>UI / Visual Design</option>
+                    <option>UX Design / Research</option>
+                    <option>Product Design</option>
+                    <option>Web Design</option>
+                  </select>
+                </div>
+              </div>
               <div class="form-group mb-3 p-3">
-                <base-gmap @address-response="handleAddress" :initialValue="form.formatted_address"></base-gmap>
+                <base-gmap @address-response="handleAddress"></base-gmap>
+              </div>
+              <div class="form-group mb-1 p-3 d-flex justify-content-between">
+                <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0" value="1" v-model="filters.available_to_hire">Available to
+                  Hire
+                </b-form-checkbox>
+              </div>
+              <div class="form-group mb-3 p-3 d-flex justify-content-between">
+                <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0" value="1" v-model="filters.has_designs">Has Designs
+                </b-form-checkbox>
               </div>
               <div class="form-group p-3">
-                <button class="py-2 px-4 text-white bg-info btn float-right rounded shadow">Search</button>
+                <button class="py-2 px-4 text-white bg-info btn float-right rounded shadow" type="submit">Search
+                </button>
               </div>
             </div>
 
           </form>
         </div>
-        <div class="col-md-8">
-         <div class="designer-list">
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="card">
-             <div class="row no-gutters">
-               <div class="col-md-4">
-                 <div class="p-3">
-                   <img src="https://cdn.dribbble.com/assets/landing-pages/hiring/Lilla_Bardenova@2x-d1552e8f8369cfe2b4d380484ab87b3110d6dea3251ee3d975fd4025b3d2ec15.png"
-                        alt="designer" class="img-fluid designer-image">
-                 </div>
-               </div>
-               <div class="col-md-8">
-                 <div class="card-body">
-                   <h4 class="font-18">Ricky</h4>
-                   <span class="address px-2 py-1 bg-dark text-white shadow-sm rounded font-13">Boston, MA</span>
-                   <span class="d-block mt-2 font-13">Web Development, UI/UX, Mobile Development</span>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
+        <div class="col-md-9">
+          <div class="d-flex align-items-center justify-content-center w-100 h-100" v-if="loading">
+            <b-spinner label="Loading..." style="width: 150px; height: 150px"></b-spinner>
+          </div>
+          <div class="designer-list pt-3">
+              <div class="card border-bottom mb-2 shadow-none" v-for="designer in designers" :key="designer.id">
+                <div class="card-body">
+                  <div class="card-title d-flex align-items-center">
+                    <img :src="designer.photo_url" :alt="designer.name" class="img-fluid designer-image d-block">
+                   <div class="h-100 ml-2">
+                     <span class="d-block p-1">{{ designer.name }}</span>
+                     <span class="d-block p-1">{{ designer.formatted_address }}</span>
+                   </div>
+                  </div>
+                  <h6 class="card-subtitle mb-2 text-muted">{{ designer.tagline }}</h6>
+                  <div class="row" v-if="designer.designs.length">
+                    <div class="col">
+                      <vueper-slides
+                        class="no-shadow"
+                        :visible-slides="4"
+                        slide-multiple
+                        :gap="2"
+                        :arrows="false"
+                        :bullets="false"
+                        :slide-ratio="0.25"
+                        :dragging-distance="50"
+                        :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
+                        <vueper-slide v-for="item in designer.designs"
+                                      :key="item.id"
+                                      :link="'design/'+item.slug"
+                                      :image="item.handle_image.thumbnail">
+                        </vueper-slide>
+                      </vueper-slides>
+                    </div>
+                  </div>
+                  <h5 class="mt-3 d-block"><a :href="`/designer/${designer.name}`">View more details</a></h5>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
     </div>
   </section>
 </template>
 
 <script>
 import background_banner from '~/assets/images/hiring_banner.svg';
+import { VueperSlides, VueperSlide } from 'vueperslides'
+import 'vueperslides/dist/vueperslides.css'
 export default {
   name: "hiring",
+  components: { VueperSlides, VueperSlide },
   data() {
     return {
-      image:background_banner,
-      form: this.$vform({
-        tagline: '',
-        name: '',
-        email: '',
-        about: '',
-        formatted_address: '',
-        location: {
-          aa: '123',
-          bb: '233'
-        },
-        available_to_hire: false
-      })
+      designers: [],
+      loading: false,
+      image: background_banner,
+      filters: {
+        available_to_hire: 0,
+        has_designs: 0,
+        q: '',
+        latitude: '',
+        longitude: '',
+        distance: '',
+        orderBy: 'latest',
+        keywords: '',
 
+      }
     }
   },
-  methods:{
-    handleAddress(data) {
-      this.form.formatted_address = data.formatted_address
-      this.form.location.longitude = data.longitude
-      this.form.location.latitude = data.latitude
+  created() {
+    this.fetchDesigners()
+  },
+  computed: {
+    queryString() {
+      return Object.keys(this.filters)
+        .map(k => `${k}=${this.filters[k]}`).join('&');
     }
-  }
+  },
+  methods: {
+    handleAddress(data) {
+      this.filters.longitude = data.longitude
+      this.filters.latitude = data.latitude
+      console.log(this.filters.latitude)
+    },
+    fetchDesigners() {
+      this.loading = true
+      this.$axios.get(`/search/designers?${this.queryString}`)
+        .then(res => {
+          this.designers = res.data.data
+        }).catch(err => {
+        console.log(err)
+      }).finally(() => {
+        this.loading = false
+      })
+    }
+  },
+
 }
 </script>
 
 <style scoped lang="scss">
+.vueperslide{
+  border-radius: 4px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
 .banner_section{
   margin-bottom: 20px;
  background: #E9ECFF;
@@ -537,7 +184,8 @@ export default {
     line-height: 29px;
   }
 }
-.hire-desc{
+
+.hire-desc {
   width: 95%;
   margin-top: 8px;
   color: #6e6d7a;
@@ -545,23 +193,28 @@ export default {
   font-weight: 400;
   line-height: 20px;
 }
-.designer-image{
-  width: 80px;
+
+.designer-image {
+  width: 65px;
+  border-radius: 50%;
 }
-.designer-list{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
-  @media screen and (max-width:575px) {
-  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
-  }
-  @media screen and (max-width:767px) {
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  }
+
+.designer-list {
+  //display: grid;
+  //grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  //@media screen and (max-width: 575px) {
+  //  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  //}
+  //@media screen and (max-width: 767px) {
+  //  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  //}
   gap: 15px;
-  .card{
+
+  .card {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     border: none;
-    span{
+
+    span {
       font-size: 13px;
     }
   }

@@ -19,7 +19,7 @@
             <b-dropdown-item href="#">RU</b-dropdown-item>
             <b-dropdown-item href="#">FA</b-dropdown-item>
           </b-nav-item-dropdown>
-          <div v-if="!$auth.loggedIn">
+          <div v-if="!$auth.loggedIn" class="d-flex align-items-center font-13">
             <b-nav-item :to="{name:'register'}">
               Sign Up
             </b-nav-item>
