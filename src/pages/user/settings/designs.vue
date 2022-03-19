@@ -25,17 +25,33 @@
 <!--  </table>-->
   <b-table
     id="my-table"
-    :items="items"
+    :items="designs"
     :per-page="perPage"
     :current-page="currentPage"
     small
-  ></b-table>
-  <b-pagination
-    v-model="currentPage"
-    :total-rows="rows"
-    :per-page="perPage"
-    aria-controls="my-table"
-  ></b-pagination>
+    :fields="fields"
+  >
+    <template #cell(images.thumbnail)="data">
+      <img :src="data.item.images.thumbnail" :alt="data.item.title" class="img-fluid design-image shadow-sm">
+    </template>
+
+    <template #cell(is_live)="data">
+      <b-badge :variant="data.item.is_live?'success':'danger'">{{ data.item.is_live ? 'Publish' : 'Draft' }}</b-badge>
+    </template>
+    <template #cell(Action)="data">
+      <nuxt-link :to="{name:'designs.edit',params:{id:data.item.id}}" class="text-dark"><i class="fas fa-edit"></i>
+      </nuxt-link>
+    </template>
+
+  </b-table>
+ <div class="d-flex justify-content-end">
+   <b-pagination
+     v-model="currentPage"
+     :total-rows="rows"
+     :per-page="perPage"
+     aria-controls="my-table"
+   ></b-pagination>
+ </div>
 </div>
 </template>
 
@@ -45,20 +61,28 @@ export default {
   middleware:['auth'],
   data() {
     return {
-      perPage: 1,
+      perPage: 5,
       currentPage: 1,
-      designs: []
+      designs: [],
+      fields: [
+        // A virtual column that doesn't exist in items
+        {key: 'images.thumbnail', label: 'Image'},
+        // A column that needs custom formatting
+
+        {key: 'title', label: 'Title'},
+        {key: 'is_live', label: 'Status'},
+        // A virtual column made up from two fields
+        'Action'
+      ],
     }
   },
-  methods:{
-    async fetchUserDesigns(){
-      const {data:res} = await this.$axios.get(`/users/${this.$auth.user.id}/designs`)
-      res.data.forEach((v,k)=>{
-          this.designs.push({
-
-          })
-        })
+  methods: {
+    async fetchUserDesigns() {
+      const {data: res} = await this.$axios.get(`/users/${this.$auth.user.id}/designs`)
+      this.designs = res.data
+      console.log(this.designs)
     }
+
   },
   mounted() {
     this.fetchUserDesigns()
@@ -71,12 +95,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .design-image{
   display: block;
   width: 85px;
 }
 .design_table thead th {
   border:none;
+}
+#my-table tbody tr td {
+  vertical-align: middle;
 }
 </style>
