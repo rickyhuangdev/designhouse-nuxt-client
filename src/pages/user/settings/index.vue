@@ -1,7 +1,16 @@
 <template>
- <div class="dashboard_page pb-5 h-100">
+ <div class="dashboard_page mb-5">
    <div class="user-account-setting">
-     <div class="container">
+     <div class="container p-3">
+       <div class="row">
+         <div class="col d-flex align-items-center justify-content-center text-center">
+           <img :src="$auth.user.photo_url" :alt="$auth.user.name" class="rounded-circle" style="width: 120px;height: 120px;">
+           <div class="user-info ml-2">
+             <h1 class="auth-username d-block mb-2">{{$auth.user.name}}</h1>
+             <span class="auth-address text-muted m-1">{{$auth.user.formatted_address}}</span>
+           </div>
+         </div>
+       </div>
        <div class="row">
          <!-- LEFT -->
          <div class="col">
@@ -51,6 +60,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.auth-username{
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38px;
+  margin-top: 5px;
+}
+.auth-address{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  margin-bottom: 8px;
+}
 a.router-link-active {
   font-weight: bold;
 }
