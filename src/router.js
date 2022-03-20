@@ -59,13 +59,9 @@ const routes = [
     children: [
       {
         path: '',
-        redirect: {name: 'settings.dashboard'},
+        redirect: {name: 'settings.profile'},
       },
-      {
-        path: 'dashboard',
-        name: 'settings.dashboard',
-        component:page('user/settings/dashboard.vue')
-      },
+
       {
         path: 'profile',
         name: 'settings.profile',

@@ -42,10 +42,6 @@ export default {
     return {
       links: [
         {
-          title: 'Dashboard',
-          route: 'settings.dashboard'
-        },
-        {
           title: 'Profile',
           route: 'settings.profile'
         },

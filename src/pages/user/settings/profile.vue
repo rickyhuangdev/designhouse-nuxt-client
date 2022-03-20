@@ -34,6 +34,22 @@
             <base-input v-model="form.tagline" :form="form" field="tagline"></base-input>
           </div>
           <div class="form-group">
+            <label for="Specialties" class="mb-2">Specialties</label>
+            <select class="form-control" id="Specialties" v-model="form.specialty_id"
+                    :class="{'is-invalid':form.errors.has('specialty_id')}">
+              <option value="1">Animation</option>
+              <option value="2">Brand / Graphic Design</option>
+              <option value="3">Illustration</option>
+              <option value="4">Leadership</option>
+              <option value="5">Mobile Design</option>
+              <option value="6">UI / Visual Design</option>
+              <option value="7">UX Design / Research</option>
+              <option value="8">Product Design</option>
+              <option value="9">Web Design</option>
+            </select>
+            <HasError :form="form" field="specialty_id"/>
+          </div>
+          <div class="form-group">
             <label class="mb-2 font-10">Address</label>
             <base-input v-model="form.address" :form="form" field="address"></base-input>
           </div>
@@ -80,6 +96,7 @@ export default {
         formatted_address: '',
         location: {},
         available_to_hire: false,
+        specialty_id: ''
       }),
       imageForm: this.$vform({
         image: ''
@@ -134,11 +151,15 @@ export default {
     },
   },
   mounted() {
+    console.log(this.$auth.user)
     Object.keys(this.form).forEach(k => {
       if (this.$auth.user.hasOwnProperty(k)) {
         this.form[k] = this.$auth.user[k]
       }
     })
+    if (this.$auth.user.specialty) {
+      this.form.specialty_id = this.$auth.user.specialty.id
+    }
     if (this.$auth.user.location) {
       this.form.location = {
         longitude: this.$auth.user.location.coordinates[0],

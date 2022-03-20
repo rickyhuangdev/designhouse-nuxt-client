@@ -22,18 +22,18 @@
                   <input type="text" class="form-control" id="exampleInputEmail1" v-model="filters.keywords">
                 </div>
                 <div class="form-group mb-3">
-                  <label for="exampleFormControlSelect1" class="mb-3">Specialties</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
+                  <label for="Specialties" class="mb-3">Specialties</label>
+                  <select class="form-control" id="Specialties">
                     <option>Choose a Specialty</option>
-                    <option>Animation</option>
-                    <option>Brand / Graphic Design</option>
-                    <option>Illustration</option>
-                    <option>Leadership</option>
-                    <option>Mobile Design</option>
-                    <option>UI / Visual Design</option>
-                    <option>UX Design / Research</option>
-                    <option>Product Design</option>
-                    <option>Web Design</option>
+                    <option value="1">Animation</option>
+                    <option value="2">Brand / Graphic Design</option>
+                    <option value="3">Illustration</option>
+                    <option value="4">Leadership</option>
+                    <option value="5">Mobile Design</option>
+                    <option value="6">UI / Visual Design</option>
+                    <option value="7">UX Design / Research</option>
+                    <option value="8">Product Design</option>
+                    <option value="9">Web Design</option>
                   </select>
                 </div>
               </div>

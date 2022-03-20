@@ -31,7 +31,7 @@
              </div>
 
             </template>
-            <b-dropdown-item :to="{name:'settings.dashboard'}">Profile</b-dropdown-item>
+            <b-dropdown-item :to="{name:'settings.profile'}">Profile</b-dropdown-item>
             <b-dropdown-item @click.prevent="logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
