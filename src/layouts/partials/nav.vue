@@ -13,12 +13,7 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto d-flex align-items-md-center">
-          <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">ES</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-            <b-dropdown-item href="#">FA</b-dropdown-item>
-          </b-nav-item-dropdown>
+         <nuxt-link to="/upload" class="btn btn-primary btn-sm rounded shadow">Upload Designs</nuxt-link>
           <div v-if="!$auth.loggedIn" class="d-flex align-items-center font-13">
             <b-nav-item :to="{name:'register'}">
               Sign Up

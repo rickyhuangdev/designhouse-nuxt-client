@@ -49,8 +49,6 @@
             ></textarea>
             <HasError :form="form" field="about"/>
           </div>
-
-
           <div class="form-group">
             <label class="mb-2 font-10 d-flex align-items-center">
               <input v-model="form.available_to_hire" type="checkbox" class="mr-2" value="true"/>
