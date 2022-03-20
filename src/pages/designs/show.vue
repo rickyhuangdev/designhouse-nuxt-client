@@ -200,6 +200,10 @@ export default {
         })
     },
     likeDesign() {
+      if(!this.$auth.loggedIn){
+        this.$toasted.info('Please Login first').goAway(1500)
+        return ;
+      }
       this.$axios.post(`/designs/${this.design.id}/like`)
         .then(res => {
           this.current_user_likes = !this.current_user_likes
@@ -208,7 +212,9 @@ export default {
     }
   },
   created() {
-    this.checkIfCurrentUserLikes()
+    if(this.$auth.loggedIn){
+      this.checkIfCurrentUserLikes()
+    }
   }
 }
 </script>

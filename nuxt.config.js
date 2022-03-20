@@ -32,8 +32,8 @@ export default {
   plugins: [
     '~/plugins/vform.js',
     '~/plugins/vue-observe-visibility.js',
-    '~/components/_globals',
-    {src: '~/plugins/gmaps', ssr: false}
+    {src: '~/plugins/gmaps', ssr: false},
+    {src: '~/plugins/vue-toasted.js', mode: 'client'}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

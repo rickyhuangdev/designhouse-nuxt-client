@@ -1,6 +1,16 @@
 <template>
   <div class="border-0">
     <h3 class="mb-3 fw-700">Profile</h3>
+    <div class="row mb-3">
+      <div class="col d-flex align-items-center">
+        <img :src="$auth.user.photo_url" :alt="$auth.user.name" class="rounded-circle" style="width: 75px;height: 75px;">
+        <label class="btn btn-primary ml-3 rounded-lg btn-md shadow-sm text-white">
+          <input type="file" name="image" hidden @change="uploadImage" accept="image/*">
+          Upload Image
+        </label>
+
+      </div>
+    </div>
     <div class="row">
       <div class="col d-flex justify-content-center">
         <form @submit.prevent="submit" class="w-100">
@@ -89,6 +99,9 @@ export default {
       this.form.formatted_address = data.formatted_address
       this.form.location.longitude = data.longitude
       this.form.location.latitude = data.latitude
+    },
+    uploadImage(e){
+      console.log(e.target.files)
     }
   },
   mounted() {

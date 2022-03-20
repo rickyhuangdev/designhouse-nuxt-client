@@ -4,7 +4,7 @@
      <div class="container p-3">
        <div class="row">
          <div class="col d-flex align-items-center justify-content-center text-center">
-           <img :src="$auth.user.photo_url" :alt="$auth.user.name" class="rounded-circle" style="width: 120px;height: 120px;">
+           <img :src="$auth.user.photo_url" :alt="$auth.user.name" class="rounded-circle" style="width: 90px;height: 90px;">
            <div class="user-info ml-2">
              <h1 class="auth-username d-block mb-2">{{$auth.user.name}}</h1>
              <span class="auth-address text-muted m-1">{{$auth.user.formatted_address}}</span>
