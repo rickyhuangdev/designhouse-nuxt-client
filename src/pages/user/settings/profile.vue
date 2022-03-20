@@ -1,19 +1,23 @@
 <template>
   <div class="border-0">
     <h3 class="mb-3 fw-700">Profile</h3>
-    <div class="row mb-3">
+    <div class="row">
       <div class="col d-flex align-items-center">
-        <img :src="$auth.user.photo_url" :alt="$auth.user.name" class="rounded-circle" style="width: 75px;height: 75px;">
-        <label class="btn btn-primary ml-3 rounded-lg btn-md shadow-sm text-white">
-          <input type="file" name="image" hidden @change="uploadImage" accept="image/*">
-          Upload Image
-        </label>
-
+        <!--          <label class="mb-2 font-10">Upload Image</label>-->
+        <img :src="$auth.user.photo_url" :alt="$auth.user.name" class="rounded-circle"
+             style="width: 75px;height: 75px;">
+        <form class="ml-2" @submit.prevent="uploadImage" enctype="multipart/form-data">
+          <div class="py-2">
+            <input type="file" name="image" @change="handleImageUpload" accept="image/*">
+          </div>
+          <button class="btn btn-primary btn-sm shadow rounded" :disabled="uploadImageLoading"> Upload Image</button>
+          <span class="text-danger d-block mt-1" v-if="imageError">{{ imageError }}</span>
+        </form>
       </div>
     </div>
     <div class="row">
       <div class="col d-flex justify-content-center">
-        <form @submit.prevent="submit" class="w-100">
+        <form @submit.prevent="submit" class="w-100" enctype="multipart/form-data">
           <alert-success :form="form">
             Profile Successfully Updated
           </alert-success>
@@ -67,30 +71,60 @@ export default {
   name: "profile",
   data() {
     return {
+      image: '',
+      imageError: '',
+      uploadImageLoading: false,
       form: this.$vform({
         tagline: '',
         name: '',
         email: '',
         about: '',
         formatted_address: '',
-        location: {
-          aa: '123',
-          bb: '233'
-        },
-        available_to_hire: false
+        location: {},
+        available_to_hire: false,
+      }),
+      imageForm: this.$vform({
+        image: ''
       })
-
     }
   },
   methods: {
     submit() {
       this.form.put(`/settings/profile`).then(re => {
-        // setTimeout(() => {
-        //   this.$router.push({name: 'settings.designs'})
-        // }, 1000)
+        this.$auth.fetchUser()
+        setTimeout(() => {
+          this.$router.push({name: 'settings.designs'})
+        }, 1000)
       }).catch(err => {
         console.log(err)
       })
+    },
+    handleImageUpload(e) {
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length)
+        return;
+      this.image = files[0];
+    },
+    uploadImage(e) {
+      this.uploadImageLoading = true
+      e.preventDefault()
+      let data = new FormData();
+      data.append('image', this.image);
+      this.$axios.post('/user/image', data).then(re => {
+        this.$toasted.success('Upload Successfully').goAway(1500)
+        this.imageError = ''
+        setTimeout(() => {
+          this.$auth.fetchUser()
+        }, 3500)
+      }).catch(err => {
+
+        if (err.response.status === 422 && err.response.data.errors.image) {
+          this.imageError = err.response.data.errors.image[0]
+        }
+      }).finally(() => {
+        this.uploadImageLoading = false
+      })
+
     },
     callbackMethod() {
 
@@ -100,9 +134,6 @@ export default {
       this.form.location.longitude = data.longitude
       this.form.location.latitude = data.latitude
     },
-    uploadImage(e){
-      console.log(e.target.files)
-    }
   },
   mounted() {
     Object.keys(this.form).forEach(k => {
