@@ -40,6 +40,20 @@
               <div class="form-group mb-3 p-3">
                 <base-gmap @address-response="handleAddress"></base-gmap>
               </div>
+              <div class="form-group mb-1 p-3 d-flex flex-column justify-content-between">
+                <label for="Specialties" class="mb-3">Unit</label>
+                <b-form-checkbox class="mb-2" value="km" v-model="filters.unit">Km
+                </b-form-checkbox>
+                <b-form-checkbox class="mb-2" value="m" v-model="filters.unit">M
+                </b-form-checkbox>
+              </div>
+              <div class="form-group mb-1 p-3 d-flex flex-column">
+                <label class="mb-3">Distance</label>
+                <b-form-checkbox class="mb-2" value="5" v-model="filters.distance"><=5 Km
+                </b-form-checkbox>
+                <b-form-checkbox class="mb-2" value="6" v-model="filters.distance">>5 Km
+                </b-form-checkbox>
+              </div>
               <div class="form-group mb-1 p-3 d-flex justify-content-between">
                 <b-form-checkbox class="mb-2 mr-sm-2 mb-sm-0" value="1" v-model="filters.available_to_hire">Available to
                   Hire
@@ -67,12 +81,13 @@
                   <div class="card-title d-flex align-items-center">
                     <img :src="designer.photo_url" :alt="designer.name" class="img-fluid designer-image d-block">
                    <div class="h-100 ml-2">
-                     <span class="d-block p-1">{{ designer.name }}</span>
-                     <span class="d-block p-1">{{ designer.formatted_address }}</span>
+                     <span class="d-block pb-2 designer-name">{{ designer.name }}</span>
+                     <b-badge variant="primary" class="mb-1">{{ designer.specialty.name }}</b-badge>
+                     <span class="d-block p-1 resume-card-location">{{ designer.formatted_address }}</span>
                    </div>
                   </div>
                   <h6 class="card-subtitle mb-2 text-muted">{{ designer.tagline }}</h6>
-                  <div class="row" v-if="designer.designs.length">
+                  <div class="row" v-if="designer.live_designs.length">
                     <div class="col">
                       <vueper-slides
                         class="no-shadow"
@@ -84,7 +99,7 @@
                         :slide-ratio="0.25"
                         :dragging-distance="50"
                         :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
-                        <vueper-slide v-for="item in designer.designs"
+                        <vueper-slide v-for="item in designer.live_designs"
                                       :key="item.id"
                                       :link="'design/'+item.slug"
                                       :image="item.handle_image.thumbnail">
@@ -124,6 +139,7 @@ export default {
         distance: '',
         orderBy: 'latest',
         keywords: '',
+        unit:'',
 
       }
     }
@@ -222,5 +238,16 @@ export default {
 .search-section{
   border: none;
 
+}
+.designer-name{
+  font-size: 18px!important;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+.resume-card-location{
+  font-weight: 400;
+  line-height: 28px;
+  color: #6e6d7a;
+  text-transform: capitalize;
 }
 </style>
