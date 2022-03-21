@@ -107,7 +107,7 @@
                       </vueper-slides>
                     </div>
                   </div>
-                  <h5 class="mt-3 d-block"><a :href="`/designer/${designer.name}`">View more details</a></h5>
+                  <h5 class="mt-3 d-block"><a :href="`/designer/${designer.username}`">View more details</a></h5>
 
                 </div>
               </div>

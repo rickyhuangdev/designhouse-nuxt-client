@@ -82,12 +82,6 @@ const routes = [
         name: 'settings.designs',
         component:page('user/settings/designs.vue')
       },
-      {
-        path: 'designs',
-        name: 'settings.designs',
-        component:page('user/settings/designs.vue')
-      }
-
 
     ]
   },
@@ -116,6 +110,7 @@ const routes = [
     name: 'designers.hiring',
     component: page('designers/hiring.vue')
   },
+
 ];
 export const createRouter = () => {
   return new Router({
