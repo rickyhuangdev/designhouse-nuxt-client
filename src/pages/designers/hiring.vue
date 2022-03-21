@@ -23,8 +23,8 @@
                 </div>
                 <div class="form-group mb-3">
                   <label for="Specialties" class="mb-3">Specialties</label>
-                  <select class="form-control" id="Specialties">
-                    <option>Choose a Specialty</option>
+                  <select class="form-control" id="Specialties" v-model="filters.specialty">
+                    <option value="null">Choose a Specialty</option>
                     <option value="1">Animation</option>
                     <option value="2">Brand / Graphic Design</option>
                     <option value="3">Illustration</option>
@@ -140,6 +140,7 @@ export default {
         orderBy: 'latest',
         keywords: '',
         unit:'',
+        specialty:''
 
       }
     }

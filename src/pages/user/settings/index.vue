@@ -48,7 +48,7 @@ export default {
         {
           title: 'Designs',
           route: 'settings.designs'
-        }
+        },
       ]
     }
   }

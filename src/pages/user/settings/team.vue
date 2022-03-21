@@ -2,7 +2,7 @@
 <div class="h-100">
   <div class="row">
     <div class="col">
-      <h1>wesdfdsfrwer</h1>
+      <h1></h1>
     </div>
   </div>
 </div>

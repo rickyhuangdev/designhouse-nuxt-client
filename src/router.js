@@ -41,7 +41,7 @@ const routes = [
   {
     path:'/user/dashboard',
     name:'dashboard',
-    component: page('user/settings/dashboard.vue')
+    component: page('user/settings/team.vue')
   },
   {
     path: '/upload',
@@ -76,11 +76,6 @@ const routes = [
         path: 'profile',
         name: 'settings.profile',
         component:page('user/settings/general.vue')
-      },
-      {
-        path: 'designs',
-        name: 'settings.designs',
-        component:page('user/settings/designs.vue')
       },
 
     ]
