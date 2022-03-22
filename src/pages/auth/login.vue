@@ -1,33 +1,39 @@
 <template>
-  <section class="container-fluid py-5 d-flex justify-content-center align-items-center min-vh-100">
-    <div class="auth-body shadow-sm ">
-      <h1 class="text-uppercase fw-500 mb-4 text-center font-22">
-        Login
-      </h1>
-      <form class="auth-form" @submit.prevent="submit">
-        <alert-error :form="form" v-if="form.errors.has('message')">
-          {{form.errors.get('message')}}
-          <nuxt-link :to="{name:'verification.resend'}">
-            Resend verify email
-          </nuxt-link>
-        </alert-error>
-        <div class="form-group mb-3">
-          <base-input v-model="form.email" :form="form" field="email"></base-input>
+  <section class="container-fluid py-5 min-vh-100">
+    <div class="row h-100 mt-5">
+      <div class="col d-flex justify-content-center">
+        <div class="auth-body shadow-sm ">
+          <h1 class="text-uppercase fw-500 mb-4 text-center font-22">
+            Login
+          </h1>
+          <form class="auth-form" @submit.prevent="submit">
+            <alert-error :form="form" v-if="form.errors.has('message')">
+              {{ form.errors.get('message') }}
+              <nuxt-link :to="{name:'verification.resend'}">
+                Resend verify email
+              </nuxt-link>
+            </alert-error>
+            <div class="form-group mb-3">
+              <base-input v-model="form.email" :form="form" field="email"></base-input>
+            </div>
+            <div class="form-group">
+              <base-input v-model="form.password" :form="form" field="password" inputType="password"></base-input>
+            </div>
+            <div class="mt-4 mb-4 clearfix">
+              <nuxt-link to="/password/email" class="forgot-pass color-blue font-14 fw-400" href="#"> Forgot password
+                ?
+              </nuxt-link>
+            </div>
+            <div class="text-right">
+              <base-button :loading="form.busy">Login</base-button>
+            </div>
+            <p class="font-14 fw-400 text-center mt-4">
+              Don't have an account yet?
+              <nuxt-link to="/register" class="color-blue"> Create an account</nuxt-link>
+            </p>
+          </form>
         </div>
-        <div class="form-group">
-          <base-input v-model="form.password" :form="form" field="password" inputType="password"></base-input>
-        </div>
-        <div class="mt-4 mb-4 clearfix">
-          <nuxt-link to="/password/email" class="forgot-pass color-blue font-14 fw-400" href="#"> Forgot password ? </nuxt-link>
-        </div>
-        <div class="text-right">
-          <base-button :loading="form.busy">Login</base-button>
-        </div>
-        <p class="font-14 fw-400 text-center mt-4">
-          Don't have an account yet?
-          <nuxt-link to="/register" class="color-blue"> Create an account</nuxt-link>
-        </p>
-      </form>
+      </div>
     </div>
   </section>
 </template>

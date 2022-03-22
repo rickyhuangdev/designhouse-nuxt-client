@@ -20,11 +20,11 @@
         </div>
         <div class="form-group">
           <label class="mb-2 font-10">Password</label>
-          <base-input v-model="form.password" :form="form" field="password"></base-input>
+          <base-input v-model="form.password" :form="form" field="password" inputType="password"></base-input>
         </div>
         <div class="form-group">
           <label class="mb-2 font-10">Confirm Password</label>
-          <base-input v-model="form.password_confirmation" :form="form" field="password_confirmation"></base-input>
+          <base-input v-model="form.password_confirmation" :form="form" field="password_confirmation" inputType="password"></base-input>
         </div>
 
         <div class="text-right">

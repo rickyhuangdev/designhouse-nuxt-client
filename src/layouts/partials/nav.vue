@@ -22,15 +22,13 @@
               Sign In
             </b-nav-item>
           </div>
-          <b-nav-item-dropdown right  v-else>
+          <b-nav-item-dropdown right  v-else >
             <!-- Using 'button-content' slot -->
-            <template #button-content>
-             <div class="d-flex align-items-center">
-               <img :src="$auth.user.photo_url" :alt="$auth.user.name" class="rounded-circle" style="width: 35px;">
-               <em class="ml-1">{{ $auth.user.name }}</em>
-             </div>
+             <template #button-content>
+               <img :src="$auth.user.photo_url" :alt="$auth.user.name" class="rounded-circle d-inline-block" style="width: 35px;">
+                 <em class="ml-1">{{ $auth.user.name }}</em>
+             </template>
 
-            </template>
             <b-dropdown-item :to="{name:'settings.profile'}">Profile</b-dropdown-item>
             <b-dropdown-item @click.prevent="logout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -51,13 +49,13 @@ export default {
 }
 </script>
 
-<style scoped>
-.dropdown-menu{
-  left: -100px!important;
-  margin-top: 15px;
-}
+<style>
 .login-text{
   color: #6e6d7a!important;
   font-weight: 500;
 }
+/*#__BVID__24__BV_toggle_{*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*}*/
 </style>

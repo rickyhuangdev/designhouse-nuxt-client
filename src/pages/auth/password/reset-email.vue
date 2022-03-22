@@ -1,5 +1,5 @@
 <template>
-  <section class="resend-email py-5">
+  <section class="resend-email py-5 min-vh-100">
     <div class="container">
       <div class="row  align-items-center justify-content-center">
         <div class="col flex-grow-0">
@@ -18,15 +18,15 @@
                 </alert-success>
                 <div class="form-group">
                   <label class="mb-2 font-10">Email address</label>
-                  <base-input v-model="form.email" :form="form" field="email"></base-input>
+                  <base-input v-model="form.email" :form="form" field="email" ></base-input>
                 </div>
                 <div class="form-group">
                   <label class="mb-2 font-10">Password</label>
-                  <base-input v-model="form.password" :form="form" field="password"></base-input>
+                  <base-input v-model="form.password" :form="form" field="password" inputType="password"></base-input>
                 </div>
                 <div class="form-group">
                   <label class="mb-2 font-10">Confirm Password</label>
-                  <base-input v-model="form.password_confirmation" :form="form" field="password"></base-input>
+                  <base-input v-model="form.password_confirmation" :form="form" field="password" inputType="password"></base-input>
                 </div>
                 <base-button :loading="form.busy">Reset Password</base-button>
 

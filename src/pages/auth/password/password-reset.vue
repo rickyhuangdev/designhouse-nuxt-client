@@ -1,5 +1,5 @@
 <template>
-  <section class="resend-email py-5">
+  <section class="resend-email py-5 min-vh-100">
     <div class="container">
       <div class="row  align-items-center justify-content-center">
         <div class="col flex-grow-0">
