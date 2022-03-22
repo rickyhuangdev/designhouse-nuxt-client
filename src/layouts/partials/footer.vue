@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="col-md-4 text-center">
-          <p class="font-14 fw-300">
+          <p class="font-14 fw-300 m-0">
             © 2022 Project. All rights reserved.
           </p>
         </div>

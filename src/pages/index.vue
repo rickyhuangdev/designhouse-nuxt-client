@@ -11,7 +11,6 @@
      </div>
       <div class="section design-list py-5 container">
         <base-design v-for="design in designs" :key="design.id" :design="design">
-
         </base-design>
       </div>
       <div>

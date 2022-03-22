@@ -13,9 +13,7 @@ export default {
     ],
     link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}],
     script: [
-      {src:"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js"},
       {src:"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"},
-      {src:"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.1/js/bootstrap.bundle.min.js"},
     ]
   },
   srcDir: "src/",
@@ -23,7 +21,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '~/assets/scss/main.scss',
-    // '~/assets/css/bootstrap.min.css',
+    '~/assets/css/bootstrap.min.css',
     // '~/assets/css/menukit.css',
 
   ],
@@ -32,6 +30,7 @@ export default {
   plugins: [
     '~/plugins/vform.js',
     '~/plugins/vue-observe-visibility.js',
+    '~/components/_globals.js',
     {src: '~/plugins/gmaps', ssr: false},
     {src: '~/plugins/vue-toasted.js', mode: 'client'}
   ],
@@ -97,6 +96,9 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['vform'],
+    babel: {
+      compact: true,
+    },
   },
   env: {
     baseUrl: process.env.BASE_URL || 'http://designhouse.test:3000'

@@ -7,7 +7,7 @@
             <h1 class="content-title">
               Discover the world’s top designers & creatives
             </h1>
-            <p>
+            <p class="mt-2" style="letter-spacing: 1px">
               DesignHouse is the leading destination to find & showcase creative work and home to the world's best
               design professionals.
             </p>
