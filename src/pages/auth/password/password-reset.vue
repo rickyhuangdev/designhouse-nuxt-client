@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row  align-items-center justify-content-center">
         <div class="col flex-grow-0">
-          <div class="card shadow-sm" style="width: 30rem;">
+          <div class="card shadow-sm reset-form">
             <div class="card-body">
               <h5 class="card-title mb-4 text-center">Reset Password</h5>
               <form @submit.prevent="submit">
@@ -56,6 +56,16 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.reset-form {
+  width: 30rem !important;
+}
+
+@media screen and (max-width: 575px) {
+  .reset-form {
+    width: 20rem !important;
+
+  }
+}
 
 </style>

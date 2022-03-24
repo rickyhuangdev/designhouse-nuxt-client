@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row  align-items-center justify-content-center">
         <div class="col flex-grow-0">
-          <div class="card shadow-sm" style="width: 30rem;">
+          <div class="card shadow-sm resend-form">
             <div class="card-body">
               <h5 class="card-title mb-4">Resend Verification Email</h5>
               <form @submit.prevent="submit">
@@ -59,6 +59,16 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.resend-form {
+  width: 30rem !important;
+}
+
+@media screen and (max-width: 575px) {
+  .resend-form {
+    width: 20rem !important;
+
+  }
+}
 
 </style>

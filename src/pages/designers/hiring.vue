@@ -75,29 +75,29 @@
           <div class="d-flex align-items-center justify-content-center w-100 h-100" v-if="loading">
             <b-spinner label="Loading..." style="width: 150px; height: 150px"></b-spinner>
           </div>
-          <div class="designer-list pt-3">
-              <div class="card border-bottom mb-2 shadow-none" v-for="designer in designers" :key="designer.id">
-                <div class="card-body">
-                  <div class="card-title d-flex align-items-center">
-                    <img :src="designer.photo_url" :alt="designer.name" class="img-fluid designer-image d-block">
-                   <div class="h-100 ml-2">
-                     <span class="d-block pb-2 designer-name">{{ designer.name }}</span>
-                     <b-badge variant="primary" class="mb-1">{{ designer.specialty.name }}</b-badge>
-                     <span class="d-block p-1 resume-card-location">{{ designer.formatted_address }}</span>
-                   </div>
+          <div class="designer-list pt-3" v-if="designers.length">
+            <div class="card border-bottom mb-2 shadow-none" v-for="designer in designers" :key="designer.id">
+              <div class="card-body">
+                <div class="card-title d-flex align-items-center">
+                  <img :src="designer.photo_url" :alt="designer.name" class="img-fluid designer-image d-block">
+                  <div class="h-100 ml-2">
+                    <span class="d-block pb-2 designer-name">{{ designer.name }}</span>
+                    <b-badge variant="primary" class="mb-1" v-if="designer.specialty">{{ designer.specialty.name }}</b-badge>
+                    <span class="d-block p-1 resume-card-location">{{ designer.formatted_address }}</span>
                   </div>
+                </div>
                   <h6 class="card-subtitle mb-2 text-muted">{{ designer.tagline }}</h6>
-                  <div class="row" v-if="designer.live_designs.length">
-                    <div class="col">
-                      <vueper-slides
-                        class="no-shadow"
-                        :visible-slides="4"
-                        slide-multiple
-                        :gap="2"
-                        :arrows="false"
-                        :bullets="false"
-                        :slide-ratio="0.25"
-                        :dragging-distance="50"
+                <div class="row" v-if="designer.live_designs.length >0">
+                  <div class="col">
+                    <vueper-slides
+                      class="no-shadow"
+                      :visible-slides="4"
+                      slide-multiple
+                      :gap="2"
+                      :arrows="false"
+                      :bullets="false"
+                      :slide-ratio="0.25"
+                      :dragging-distance="50"
                         :breakpoints="{ 800: { visibleSlides: 2, slideMultiple: 2 } }">
                         <vueper-slide v-for="item in designer.live_designs"
                                       :key="item.id"
@@ -107,8 +107,7 @@
                       </vueper-slides>
                     </div>
                   </div>
-                  <h5 class="mt-3 d-block"><a :href="`/designer/${designer.username}`">View more details</a></h5>
-
+                <a :href="`/designer/${designer.username}`" class="mt-3 d-block font-13 text-dark">View more details</a>
                 </div>
               </div>
             </div>
@@ -120,8 +119,9 @@
 
 <script>
 import background_banner from '~/assets/images/hiring_banner.svg';
-import { VueperSlides, VueperSlide } from 'vueperslides'
+import {VueperSlide, VueperSlides} from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
+
 export default {
   name: "hiring",
   components: { VueperSlides, VueperSlide },
@@ -165,6 +165,7 @@ export default {
       this.$axios.get(`/search/designers?${this.queryString}`)
         .then(res => {
           this.designers = res.data.data
+          this.loading = false
         }).catch(err => {
         console.log(err)
       }).finally(() => {

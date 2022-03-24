@@ -12,9 +12,9 @@
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto d-flex align-items-md-center">
-         <nuxt-link to="/upload" class="btn btn-primary btn-sm rounded shadow">Upload Designs</nuxt-link>
-          <div v-if="!$auth.loggedIn" class="d-flex align-items-center font-13">
+        <b-navbar-nav class="ml-auto">
+         <nuxt-link to="/upload" class="btn btn-primary btn-sm rounded shadow d-flex justify-content-center align-items-center">Upload Designs</nuxt-link>
+          <div v-if="!$auth.loggedIn" class="d-flex font-13 login-item">
             <b-nav-item :to="{name:'register'}">
               Sign Up
             </b-nav-item>
@@ -54,8 +54,14 @@ export default {
   color: #6e6d7a!important;
   font-weight: 500;
 }
-/*#__BVID__24__BV_toggle_{*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*}*/
+
+@media screen and  (max-width: 767px) {
+  .login-item{
+    display: flex;
+    flex-direction: column;
+  }
+  .login-item >*{
+    padding-right: 5px;
+  }
+}
 </style>

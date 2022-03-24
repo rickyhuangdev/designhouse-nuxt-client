@@ -1,5 +1,15 @@
 <template>
-  <div class="design-card rounded">
+  <b-skeleton-wrapper :loading="loading" v-if="loading">
+    <template #loading>
+      <b-card>
+        <b-skeleton width="85%"></b-skeleton>
+        <b-skeleton width="35%"></b-skeleton>
+        <b-skeleton width="65%"></b-skeleton>
+        <b-skeleton width="70%"></b-skeleton>
+      </b-card>
+    </template>
+  </b-skeleton-wrapper>
+  <div class="design-card rounded" v-else>
     <div class="bg-white rounded-lg overflow-hidden flex-1 flex flex-col">
       <a :href="`/design/${design.slug}`">
         <div class="bg-cover h-48" :style="`background-image: url('${design.images.thumbnail}');`">
@@ -59,6 +69,10 @@ export default {
   props: {
     design: {
       type: Object,
+      required: true
+    },
+    loading:{
+      type:Boolean,
       required: true
     }
   }

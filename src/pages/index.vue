@@ -1,25 +1,25 @@
 <template>
   <div>
-      <base-jumbotron></base-jumbotron>
-     <div class="container">
-       <div class="row">
-         <div class="col">
-           <h2 class="text-center index-title">You aren’t following anyone yet</h2>
-           <h5 class="text-center mt-4 sub-title">Check out some of today’s popular shots</h5>
-         </div>
-       </div>
-     </div>
-      <div class="section design-list py-5 container">
-        <base-design v-for="design in designs" :key="design.id" :design="design">
-        </base-design>
-      </div>
-      <div>
-        <div class="row">
-          <div class="col text-center" v-if="isVisible">
-            <i class="fa fa-spinner fa-spin"></i> <span class="ml-1"> loading more...</span>
-          </div>
+    <base-jumbotron></base-jumbotron>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h2 class="text-center index-title">You aren’t following anyone yet</h2>
+          <h5 class="text-center mt-4 sub-title">Check out some of today’s popular shots</h5>
         </div>
       </div>
+    </div>
+    <div class="section design-list py-5 container" >
+      <base-design v-for="design in designs" :key="design.id" :design="design" :loading="loading">
+      </base-design>
+    </div>
+    <div>
+      <div class="row">
+        <div class="col text-center" v-if="isVisible">
+          <i class="fa fa-spinner fa-spin"></i> <span class="ml-1"> loading more...</span>
+        </div>
+      </div>
+    </div>
       <div v-observe-visibility="visibilityChanged" v-if="designs.length">
       </div>
     </div>
@@ -32,7 +32,8 @@ export default {
       page: 1,
       designs: [],
       isVisible: false,
-      last_page: 1
+      last_page: 1,
+      loading: false,
     }
   },
   created() {
@@ -40,9 +41,13 @@ export default {
   },
   methods: {
     async getDesigns() {
+       this.loading = true
       const designs = await this.$axios.get(`/designs?page=${this.page}`)
       this.designs.push(...designs.data.data)
       this.last_page = designs.data.meta.last_page
+      setTimeout(()=>{
+        this.loading = false
+      },2000)
     },
     visibilityChanged(isVisible, entry) {
       if (!isVisible) {

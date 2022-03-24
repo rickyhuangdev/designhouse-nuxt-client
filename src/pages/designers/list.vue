@@ -141,14 +141,6 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
   gap: 15px;
-  .designer-one{
-    grid-row: 1 / span 4;
-    grid-column: 1/2;
-  }
-  .designer-two{
-    grid-row: 2 / span 3;
-    grid-column: 2/3;
-  }
 
   .designer-card {
     padding: 15px;

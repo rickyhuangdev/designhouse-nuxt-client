@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-5">
+  <div class="min-vh-100">
     <!-- Start Filters -->
     <section class="filters-block shadow-sm">
       <div class="container">
@@ -10,7 +10,7 @@
             id="inline-form-custom-select-pref"
             class="mb-2 mr-sm-2 mb-sm-0 w-25"
             v-model="filters.orderBy"
-            :options="[{ text: 'Choose...', value: null }, { text: 'Latest First', value: 'latest' },{ text: 'Most Liked First', value: 'likes' },]"
+            :options="[{ text: 'Latest First', value: 'latest' },{ text: 'Most Liked First', value: 'likes' },]"
           ></b-form-select>
 
           <div class="d-flex w-50 ml-3">
@@ -32,10 +32,12 @@
     <!-- End Filters -->
     <section class="cards-block mb-5 mt-5 px-2">
       <div class="container">
-        <div class="design-grid">
-          <base-design v-for="design in designs" :key="design.id" :design="design" >
-
+        <div class="design-grid" v-if="designs.length && !loading || !empty">
+          <base-design v-for="design in designs" :key="design.id" :design="design" :loading="loading">
           </base-design>
+        </div>
+        <div class="d-flex align-items-center justify-content-center w-100" v-else>
+          <b-alert show class="w-100">No Search Results</b-alert>
         </div>
       </div>
     </section>
@@ -47,6 +49,8 @@ export default {
   name: "search",
   data() {
     return {
+      loading: false,
+      empty:false,
       designs: [],
       searching: false,
       filters: {
@@ -65,14 +69,21 @@ export default {
   },
   methods: {
     search() {
-      this.searching = true
+      this.loading = true
       this.$axios.get(`/search/designs?${this.queryString}`)
         .then(res => {
           this.designs = res.data.data
         }).catch(err => {
         console.log(err)
       }).finally(() => {
-        this.searching = false
+        setTimeout(() => {
+          this.loading = false
+        }, 2000)
+        if(this.designs.length === 0){
+          this.empty = true
+        }else{
+          this.empty = false
+        }
       })
     }
   },
